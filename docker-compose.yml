@@ -3,18 +3,14 @@ services:
   frontend:
     build: ./frontend
     expose:
-      - "80"
+      - "3000"
+    privileged: true
   proxy:
     build: ./haproxy
     depends_on:
       - frontend
-      - data
     ports:
       - "80:80"
-  data:
-    build: ./data
-    expose:
-      - "8080"
   wpe:
     build: ./wpe
     depends_on:

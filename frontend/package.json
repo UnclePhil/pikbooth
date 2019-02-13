@@ -1,19 +1,19 @@
 {
-  "name": "resin-websocket",
+  "name": "ark-photo",
   "version": "1.0.0",
-  "description": "Websocket example",
+  "description": "A node photobooth app",
   "main": "index.js",
-  "homepage": "https://github.com/resin-io-projects/resin-websocket",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:resin-io-projects/resin-websocket.git"
-  },
   "scripts": {
     "start": "node index.js"
   },
-  "author": "Kostas Lekkas <kostas@resin.io>",
-  "license": "Apache-2.0",
-  "dependencies": {
-    "express": "^4.16.2"
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "extend": "^3.0.0",
+    "faye": "^1.2.3",
+    "gm": "^1.23.0",
+    "mkdirp": "^0.5.1"
   }
 }

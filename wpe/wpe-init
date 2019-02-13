@@ -1,8 +1,8 @@
 #!/bin/sh
 
-fbcp &
-until ping -c1 proxy ; do :; done
+udevd &
+udevadm trigger
 
-echo "loading WPE with url: $WPE_URL"
-# sleep 3s
-WPELauncher $WPE_URL > /dev/null 2>&1
+fbcp &
+
+WPE_BCMRPI_TOUCH=1 WPELauncher $WPE_URL

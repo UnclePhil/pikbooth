@@ -5,4 +5,4 @@ udevadm trigger
 
 fbcp &
 
-WPE_BCMRPI_TOUCH=1 WPELauncher http://proxy/index.html
+WPE_BCMRPI_TOUCH=1 WPELauncher http://proxy/

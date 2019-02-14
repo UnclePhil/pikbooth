@@ -1,14 +1,14 @@
 {
-  "name": "ark-photo",
+  "name": "PiKBooth",
   "version": "1.0.0",
-  "description": "A node photobooth app",
+  "description": "A node photobooth app - inspired from ark-photo",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "author": "",
+  "author": "review-byUnclephil",
   "license": "ISC",
-  "Dependencies": {
+  "dependencies": {
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
     "extend": "^3.0.0",

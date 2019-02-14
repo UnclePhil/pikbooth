@@ -1,5 +1,8 @@
 FROM arm32v6/node:8.9-alpine
 
+##install git  for gphoto2 install
+RUN  apk install git
+
 # Defines our working directory in container
 WORKDIR /usr/src/app
 

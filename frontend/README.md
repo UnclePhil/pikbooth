@@ -1,8 +1,11 @@
-# photobooth
-A node and web based photobooth... or something like that 😎
+# photoboothExpress
+A simple node server and web app for running a photo booth and viewing captured images
+Whilst primarily intended for use with a raspberry pi with a GPIO mounted touchscreen,
+this has been written so that it uses browser events to trigger photo capture, and therefore
+could be used with any touchscreen device on the network.
 
-## Getting Started
- - `npmm install`
- - `npm run dev` to start the app
- - `http://localhost:3000` for the client
- - `http://localhost:3000/booth` for the booth
+Images are taken with usb connected cameras (covering simple point and shoots all the way up to
+fancy DSLR's) driven by gphoto2 (http://www.gphoto.org/).
+
+
+This was reviewed and refactore by Unclephil for balena usage

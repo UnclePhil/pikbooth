@@ -1,7 +1,7 @@
 FROM arm64v8/node:8-alpine
 
 ##install git  for gphoto2 install
-RUN  apk add --no-cache --virtual git
+RUN  apk add --no-cache  git python build-base
 
 # Defines our working directory in container
 WORKDIR /usr/src/app

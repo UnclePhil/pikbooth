@@ -2,10 +2,7 @@ FROM arm64v8/node:8-alpine
 
 ##install git  for gphoto2 install
 RUN apk update && apk upgrade && \
-    apk add --no-cache --virtual .gyp \
-        python \
-        make \
-        g++ \
+    apk add --no-cache --virtual .gyp python make g++ 
 
 # Defines our working directory in container
 WORKDIR /usr/src/app

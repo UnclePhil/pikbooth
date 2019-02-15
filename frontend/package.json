@@ -18,7 +18,6 @@
   "license": "MIT",
   
   "dependencies": {
-    "express": "~4.16.2",
-    "gphoto2_ffi": "git+https://github.com/soixantecircuits/node-gphoto-fii.git#7d3f87e"
+    "express": "~4.16.2"
   }
 }

@@ -11,8 +11,8 @@ COPY package.json package.json
 
 # This install npm dependencies on the resin.io build server,
 # making sure to clean up the artifacts it creates in order to reduce the image size.
-RUN npm config set depth 0 && /
-    JOBS=MAX npm install --production
+RUN npm config set depth 0 
+RUN  JOBS=MAX npm install --production
 # This will copy all files in our root to the working  directory in the container
 COPY . ./
 

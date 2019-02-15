@@ -1,4 +1,4 @@
-FROM arm32v6/node:8.9-alpine
+FROM arm64v8/node:8-alpine
 
 ##install git  for gphoto2 install
 RUN apk update && apk upgrade && \

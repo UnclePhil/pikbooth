@@ -1,8 +1,7 @@
 FROM arm64v8/node:8-alpine
 
 ##install git  for gphoto2 install
-RUN apk update && apk upgrade && \
-    apk add --no-cache --virtual .gyp python make g++ git
+RUN  apk add --no-cache --virtual git
 
 # Defines our working directory in container
 WORKDIR /usr/src/app
@@ -12,10 +11,10 @@ COPY package.json package.json
 
 # This install npm dependencies on the resin.io build server,
 # making sure to clean up the artifacts it creates in order to reduce the image size.
-RUN npm config set depth 0
-RUN JOBS=MAX npm install --production
+RUN npm config set depth 0 && /
+    JOBS=MAX npm install --production
 # This will copy all files in our root to the working  directory in the container
 COPY . ./
 
 # server.js will run when container starts up on the device
-CMD ["npm", "start"]
+CMD ["node", "app.js"]

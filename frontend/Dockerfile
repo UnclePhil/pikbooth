@@ -13,6 +13,10 @@ COPY package.json package.json
 # making sure to clean up the artifacts it creates in order to reduce the image size.
 RUN npm config set depth 0 
 RUN  JOBS=MAX npm install --production
+
+RUN  git clone https://github.com/soixantecircuits/node-gphoto-fii.git
+RUN  mv node-gphoto-fii ./node_modules
+
 # This will copy all files in our root to the working  directory in the container
 COPY . ./
 

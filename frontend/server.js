@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var exec = require('child_process');
 
 // Enable HTML template middleware
 app.engine('html', require('ejs').renderFile);
@@ -11,6 +12,23 @@ app.use(express.static('styles'));
 app.get('/', function (req, res) {
   res.render('index.html');
 });
+
+app.get('/photo', function (req, res) {
+  
+  var dt = Date().toISOString();
+  var fn = dt+".jpg";
+
+  exec('gphoto2 --capture-image-and-download --keep --filename "'+fn+'"', (err, stdout, stderr) => {
+    if (err) {
+      console.error(`exec error: ${err}`);
+      return;
+    }
+  
+    console.log(`Click happens ${stdout}`);
+  });
+  res.render('index.html');
+});
+
 
 //start a server on port 80 and log its start to our console
 var server = app.listen(80, function () {

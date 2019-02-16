@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
 var exec = require('child_process');
+var dateFormat = require('dateformat');
+
 
 // Enable HTML template middleware
 app.engine('html', require('ejs').renderFile);
@@ -15,7 +17,8 @@ app.get('/', function (req, res) {
 
 app.get('/photo', function (req, res) {
   
-  var dt = Date().toISOString();
+  var now = new Date();
+  var dt = dateFormat(now,"yyyymmdd-hhMMss" )
   var fn = dt+".jpg";
 
   exec('gphoto2 --capture-image-and-download --keep --filename "'+fn+'"', (err, stdout, stderr) => {

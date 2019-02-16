@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var exec = require('child_process');
+
 var dateFormat = require('dateformat');
 
 
@@ -16,7 +16,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/photo', function (req, res) {
-  
+  var exec = require('child_process');
   var now = new Date();
   var dt = dateFormat(now,"yyyymmdd-hhMMss" )
   var fn = dt+".jpg";

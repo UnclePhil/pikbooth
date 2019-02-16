@@ -1,25 +1,29 @@
 {
-  "name": "photoboothExpress",
-  "version": "0.0.1",
-  "description": "a unclephil refactoring of photoboothexpress",
-  "main": "app.js",
+  "name": "simple-server-node",
+  "version": "1.0.0",
+  "description": "A simple Expressjs Web server on balena",
+  "main": "server.js",
   "scripts": {
-    "start": "node apps"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-    "keywords": [
-    "pi",
-    "raspberry",
-    "gphoto2",
-    "libgphoto",
-    "photobooth",
-    "node"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balena-io-projects/simple-server-node.git"
+  },
+  "keywords": [
+    "webserver",
+    "nodejs",
+    "expressjs"
   ],
-  "author": "David Ernsting - Unclephil",
-  "license": "MIT",
-  
+  "author": "Shaun Mulligan <shaun@balena.io>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/balena-io-projects/simple-server-node/issues"
+  },
+  "homepage": "https://github.com/balena-io-projects/simple-server-node#readme",
   "dependencies": {
-    "express": "~4.16.2",
-    "paper-ripple": "~0.3.0",
-    "ip": "~1.1.5"
+    "express": "*",
+    "ejs": "*"
   }
 }

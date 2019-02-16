@@ -25,6 +25,6 @@
   "dependencies": {
     "express": "*",
     "ejs": "*",
-    "dateformatt":"*"
+    "dateformat":"*"
   }
 }

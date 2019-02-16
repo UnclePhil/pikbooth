@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM arm32v6/node:10-alpine
 
 ##install git  for gphoto2 install
 RUN  apk add --no-cache  git python build-base

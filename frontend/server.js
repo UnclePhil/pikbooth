@@ -16,10 +16,11 @@ app.get('/', function (req, res) {
 });
 
 app.get('/photo', function (req, res) {
-  var exec = require('child_process');
+  var exec = require('child_process').exec;
   var now = new Date();
   var dt = dateFormat(now,"yyyymmdd-hhMMss" )
   var fn = dt+".jpg";
+  console.log(`try to take picture ${fn}`);
 
   exec('gphoto2 --capture-image-and-download --keep --filename "'+fn+'"', (err, stdout, stderr) => {
     if (err) {

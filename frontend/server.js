@@ -26,7 +26,7 @@ var config = {
 
 // root booth file
 app.get('/', function (req, res) {
-  res.render('booth.html');
+  res.render('booth');
 });
 
 
@@ -47,7 +47,7 @@ app.get('/photo', function (req, res) {
       return;
     }
     console.log(`Click happens ${stdout}`);
-    res.render('booth.html', pictname)
+    res.render('booth', pictname)
   });
   ;
 });

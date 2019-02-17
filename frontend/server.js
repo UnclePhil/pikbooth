@@ -1,9 +1,19 @@
 var express = require('express');
 var app = express();
 fs = require('fs');
+var exphbs  = require('express-handlebars');
 
 
 var dateFormat = require('dateformat');
+
+// Enable static CSS styles
+app.use(express.static('styles'));
+
+// enable template engines
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+//configuration
 var config = { 
   save:{
     dir: "./saved/", 
@@ -11,13 +21,6 @@ var config = {
     ext: "jpg"
   } 
 }
-
-// Enable static CSS styles
-app.use(express.static('styles'));
-// enable template engines
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
-
 
 
 // reply to request with "Hello World!"

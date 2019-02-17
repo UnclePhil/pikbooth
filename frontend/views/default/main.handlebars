@@ -3,21 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Welcome to pikbooth!</title>
+  <title>PiKBooth!</title>
+  
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/js/main.css" />
+  <script src="/js/bootstrap.min.js"></script>
   <script src="/js/main.js"></script>
 </head>
 <body>
-    <div class = "container">
-    <div class = "column col-12 p-centered">
-        <h1>PiKBooth!</h1>
+    <div class = "container-fluid">
+        <div class = "column col-12 p-centered">
+            <h1>PiKBooth the photobooth!</h1>
+        </div>
+        <div>
+            {{body}}
+        </div>
+        <div class = "column col-12 p-centered"> footer </div>
     </div>
-    <div>
-        {{body}}
-    </div>
-    <divclass = "column col-12 p-centered"> footer </div>
-    </div>
-
 </body>
 </html>

@@ -24,7 +24,7 @@
   "homepage": "https://github.com/balena-io-projects/simple-server-node#readme",
   "dependencies": {
     "express": "*",
-    "express-handlebars":"*",
+    "express-handlebars":"^3.0.0",
     "dateformat":"*"
   }
 }

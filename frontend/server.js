@@ -7,7 +7,7 @@ var exphbs  = require('express-handlebars');
 var dateFormat = require('dateformat');
 
 // Enable static CSS styles
-app.use(express.static('styles'));
+app.use(express.static('assets'));
 
 // enable template engines
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -21,13 +21,16 @@ var config = {
     ext: "jpg"
   } 
 }
+// ROUTES
+////////////////////////////////////////
 
-
-// reply to request with "Hello World!"
+// root booth file
 app.get('/', function (req, res) {
   res.render('booth.html');
 });
 
+
+// take the picture
 app.get('/photo', function (req, res) {
   var exec = require('child_process').exec;
   // picture definition

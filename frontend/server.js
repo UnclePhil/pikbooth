@@ -26,7 +26,8 @@ var config = {
 
 // root booth file
 app.get('/', function (req, res) {
-  res.render('booth');
+  picture = [];
+  res.render('booth', picture);
 });
 
 

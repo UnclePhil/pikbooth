@@ -5,6 +5,8 @@ services:
     expose:
       - "3000"
     privileged: true
+    volumes:
+      - "/mnt/data/pictures:/pictures" 
   proxy:
     build: ./haproxy
     depends_on:

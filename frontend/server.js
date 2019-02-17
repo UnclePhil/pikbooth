@@ -16,7 +16,7 @@ app.set('view engine', 'handlebars');
 //configuration
 var config = { 
   save:{
-    dir: "./saved/", 
+    dir: "/pictures/", 
     prefix: "pikbooth-",
     ext: "jpg"
   } 
@@ -26,8 +26,8 @@ var config = {
 
 // root booth file
 app.get('/', function (req, res) {
-  picture = [];
-  res.render('booth', picture);
+  picture = fs.readdirSync(config.save.dir);
+  res.render('booth', picture)
 });
 
 
@@ -48,7 +48,8 @@ app.get('/photo', function (req, res) {
       return;
     }
     console.log(`Click happens ${stdout}`);
-    res.render('booth', pictname)
+    picture = fs.readdirSync(config.save.dir)
+    res.render('booth', picture)
   });
   ;
 });

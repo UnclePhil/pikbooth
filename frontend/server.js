@@ -40,7 +40,7 @@ app.get('/photo', function (req, res) {
   var pictname= config.save.prefix+dt+"."+config.save.ext;
   var fullname = config.save.dir+pictname;
 
-  console.log(`try to take picture ${fn}`);
+  console.log(`try to take picture ${fullname}`);
 
   exec('gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"', (err, stdout, stderr) => {
     if (err) {

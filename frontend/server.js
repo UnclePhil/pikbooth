@@ -27,8 +27,8 @@ var config = {
 
 // root booth file
 app.get('/', function (req, res) {
-  picture = fs.readdirSync(config.save.dir);
-  res.render('booth', picture)
+  pictures = fs.readdirSync(config.save.dir);
+  res.render('booth', pictures)
 });
 
 
@@ -45,18 +45,16 @@ app.get('/photo', function (req, res) {
   if (config.mode=="dev") {
     fs.createReadStream('./fake/fake.jpg').pipe(fs.createWriteStream(fullname));
     console.log(`Fake click happens `);
-    pictures = fs.readdirSync(config.save.dir)
-    res.render('booth', pictures)
+    res.redirect('/');
   }
   else {
     exec('gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"', (err, stdout, stderr) => {
       if (err) {
-        console.error(`exec error: ${err}`);
+        console.error('Gphoto exec error: '+err);
         return;
       }
-      console.log(`Click happens ${stdout}`);
-      pictures = fs.readdirSync(config.save.dir)
-      res.render('booth', pictures)
+      console.log('Click happens '+fullname);
+      res.redirect('/');
     });
   } 
 });
@@ -64,8 +62,9 @@ app.get('/photo', function (req, res) {
 // list all pictures
 app.get('/pict', function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
+  console.log('picture list: '+pictures)
   res.writeHead(200, {'Content-Type': 'application/json' });
-  res.send(pictures)
+  res.send(pictures);
 });
 
 // get one pictures
@@ -80,6 +79,7 @@ app.get('/pict/:pict', function (req, res) {
 var server = app.listen(80, function () {
 
   var port = server.address().port;
+  console.log ('starting mode: '+config.mode)
   console.log('Example app listening on port ', port);
 
 });

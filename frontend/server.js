@@ -50,7 +50,7 @@ app.get('/', function (req, res) {
 app.get('/infos', function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
   console.log('picture list: '+pictures)
-  res.render('infos', {count: pictures.count, config:config })
+  res.render('infos', {count: pictures.length, config:config })
 });
 
 // take the picture

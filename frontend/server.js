@@ -64,7 +64,7 @@ app.get('/pict', function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
   console.log('picture list: '+pictures)
   res.writeHead(200, {'Content-Type': 'application/json' });
-  res.send(pictures);
+  res.end(pictures);
 });
 
 // get one pictures

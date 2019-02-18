@@ -44,14 +44,23 @@ var mime = {
 app.get('/', function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
   console.log('picture list: '+pictures)
+  res.render('client', {pictures: pictures})
+});
+
+// booth 
+app.get('/booth', function (req, res) {
+  pictures = fs.readdirSync(config.save.dir);
+  console.log('picture list: '+pictures)
   res.render('booth', {pictures: pictures, mode:config.mode})
 });
+
 
 app.get('/infos', function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
   console.log('picture list: '+pictures)
   res.render('infos', {count: pictures.length, config:config })
 });
+
 
 // take the picture
 app.get('/photo', function (req, res) {

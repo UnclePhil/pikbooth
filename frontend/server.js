@@ -14,7 +14,7 @@ app.use(express.static('assets'));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-//configuration
+//config definition
 var config = { 
   save:{
     dir: "/pictures/", 
@@ -23,6 +23,12 @@ var config = {
   }, 
   mode:"dev"   
 }
+// overwrtie by env var
+config.save.dir = process.env.PIKBOOTH_SAVE_DIR || "/pictures/" ;
+config.save.prefix = process.env.PIKBOOTH_SAVE_PREFIX || "pikbooth-" ;
+config.save.ext = process.env.PIKBOOTH_SAVE_EXT || "jpg" ;
+config.mode = process.env.PIKBOOTH_MODE || "dev" ;
+//-------------------------------------------------
 
 var mime = {
   gif: 'image/gif',
@@ -38,7 +44,7 @@ var mime = {
 app.get('/', function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
   console.log('picture list: '+pictures)
-  res.render('booth', {pictures: pictures})
+  res.render('booth', {pictures: pictures, mode:config.mode})
 });
 
 app.get('/infos', function (req, res) {

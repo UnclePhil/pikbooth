@@ -1,5 +1,6 @@
 <style>
   .cards {
+    margin-top: 100px;
     display: flex;
     flex-wrap: wrap-reverse;
     align-items: flex-start;
@@ -13,13 +14,13 @@
     max-width: 23vw;
   }
   .msg {
-    margin-top: 100px;
+    
   }
 </style>
 <main class="cards">
   {{#if pictures}}
     {{#each pictures}}
-        <img src="{{this}}" >
+        <img src="/pict/{{this}}" >
     {{/each}}  
   {{else}}
   <div class="msg">

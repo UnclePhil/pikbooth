@@ -80,9 +80,9 @@ app.get('/pict', function (req, res) {
 // get one pictures
 app.get('/pict/:pict', function (req, res) {
   
-  var pict = req.params.pict;
+  var file = req.params.pict;
   var type = mime[path.extname(file).slice(1)] || 'text/plain';
-  var s = fs.createReadStream(config.save.dir+pict);
+  var s = fs.createReadStream(config.save.dir+file);
   s.on('open', function () {
       res.set('Content-Type', type);
       s.pipe(res);

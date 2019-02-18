@@ -80,8 +80,7 @@ app.get('/pict', function (req, res) {
 // get one pictures
 app.get('/pict/:pict', function (req, res) {
   
-  var pict = request.params.pict;
-  s = fs.readFileSync(config.save.dir+pict);
+  var pict = req.params.pict;
   var type = mime[path.extname(file).slice(1)] || 'text/plain';
   var s = fs.createReadStream(config.save.dir+pict);
   s.on('open', function () {

@@ -1,4 +1,6 @@
 version: '2'
+volumes:
+  - pictures:
 services:
   frontend:
     build: ./frontend
@@ -6,7 +8,7 @@ services:
       - "3000"
     privileged: true
     volumes:
-      - "/mnt/data/pictures:/pictures" 
+      - "pictures:/pictures" 
   proxy:
     build: ./haproxy
     depends_on:

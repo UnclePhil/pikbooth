@@ -28,6 +28,7 @@ var config = {
 // root booth file
 app.get('/', function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
+  console.log('picture list: '+pictures)
   res.render('booth', pictures)
 });
 

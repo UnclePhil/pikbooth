@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var path = require('path');
 fs = require('fs');
 var exphbs  = require('express-handlebars');
 
@@ -22,6 +23,14 @@ var config = {
   }, 
   mode:"dev"   
 }
+
+var imgmime = {
+  gif: 'image/gif',
+  jpg: 'image/jpeg',
+  png: 'image/png',
+  svg: 'image/svg+xml'
+};
+
 // ROUTES
 ////////////////////////////////////////
 
@@ -70,9 +79,20 @@ app.get('/pict', function (req, res) {
 
 // get one pictures
 app.get('/pict/:pict', function (req, res) {
-  var img = fs.readFileSync(config.save.dir+pict);
-  res.writeHead(200, {'Content-Type': 'image/jpg' });
-  res.end(pict, 'binary');
+  
+  var pict = request.params.pict;
+  s = fs.readFileSync(config.save.dir+pict);
+  var type = mime[path.extname(file).slice(1)] || 'text/plain';
+  var s = fs.createReadStream(config.save.dir+pict);
+  s.on('open', function () {
+      res.set('Content-Type', type);
+      s.pipe(res);
+  });
+  s.on('error', function () {
+      res.set('Content-Type', 'text/plain');
+      res.status(404).end('Not found');
+  });
+
 });
 
 

@@ -24,7 +24,7 @@ var config = {
   mode:"dev"   
 }
 
-var imgmime = {
+var mime = {
   gif: 'image/gif',
   jpg: 'image/jpeg',
   png: 'image/png',

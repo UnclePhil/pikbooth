@@ -41,6 +41,11 @@ app.get('/', function (req, res) {
   res.render('booth', {pictures: pictures})
 });
 
+app.get('/infos', function (req, res) {
+  pictures = fs.readdirSync(config.save.dir);
+  console.log('picture list: '+pictures)
+  res.render('infos', {count: pictures.count})
+});
 
 // take the picture
 app.get('/photo', function (req, res) {

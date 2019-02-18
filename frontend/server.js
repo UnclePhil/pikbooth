@@ -44,7 +44,7 @@ app.get('/photo', function (req, res) {
   console.log(`try to take picture ${fullname}`);
   if (config.mode=="dev") {
     fs.createReadStream('./fake/fake.jpg').pipe(fs.createWriteStream(fullname));
-    console.log(`Fake click happens ${stdout}`);
+    console.log(`Fake click happens `);
     pictures = fs.readdirSync(config.save.dir)
     res.render('booth', pictures)
   }

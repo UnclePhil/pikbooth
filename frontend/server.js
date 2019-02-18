@@ -52,7 +52,7 @@ app.get('/photo', function (req, res) {
   var exec = require('child_process').exec;
   // picture definition
   var now = new Date();
-  var dt = dateFormat(now,"yyyymmdd-hhMMss" );
+  var dt = dateFormat(now,"yyyymmdd-HHMMss" );
   var pictname= config.save.prefix+dt+"."+config.save.ext;
   var fullname = config.save.dir+pictname;
 

@@ -29,7 +29,7 @@ var config = {
 app.get('/', function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
   console.log('picture list: '+pictures)
-  res.render('booth', pictures)
+  res.render('booth', {pictures: pictures})
 });
 
 
@@ -65,7 +65,7 @@ app.get('/pict', function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
   console.log('picture list: '+pictures)
   res.writeHead(200, {'Content-Type': 'application/json' });
-  res.end(pictures);
+  res.send(pictures);
 });
 
 // get one pictures

@@ -19,7 +19,8 @@ var config = {
     dir: "/pictures/", 
     prefix: "pikbooth-",
     ext: "jpg"
-  } 
+  }, 
+  mode:"dev"   
 }
 // ROUTES
 ////////////////////////////////////////
@@ -41,22 +42,30 @@ app.get('/photo', function (req, res) {
   var fullname = config.save.dir+pictname;
 
   console.log(`try to take picture ${fullname}`);
-
-  exec('gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"', (err, stdout, stderr) => {
-    if (err) {
-      console.error(`exec error: ${err}`);
-      return;
-    }
-    console.log(`Click happens ${stdout}`);
-    picture = fs.readdirSync(config.save.dir)
-    res.render('booth', picture)
-  });
-  ;
+  if (config.mode=="dev") {
+    fs.createReadStream('./fake/fake.jpg').pipe(fs.createWriteStream(fullname));
+    console.log(`Fake click happens ${stdout}`);
+    pictures = fs.readdirSync(config.save.dir)
+    res.render('booth', pictures)
+  }
+  else {
+    exec('gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"', (err, stdout, stderr) => {
+      if (err) {
+        console.error(`exec error: ${err}`);
+        return;
+      }
+      console.log(`Click happens ${stdout}`);
+      pictures = fs.readdirSync(config.save.dir)
+      res.render('booth', pictures)
+    });
+  } 
 });
 
 // list all pictures
 app.get('/pict', function (req, res) {
-  
+  pictures = fs.readdirSync(config.save.dir);
+  res.writeHead(200, {'Content-Type': 'application/json' });
+  res.send(pictures)
 });
 
 // get one pictures

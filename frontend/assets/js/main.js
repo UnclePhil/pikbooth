@@ -1,4 +1,4 @@
 // -------------------------------------------- 
-// script dedicated to booth actions
+// script dedicated to main templates actions
 // Ph Koenig @2019
 //---------------------------------------------

@@ -65,7 +65,7 @@ app.get('/', function (req, res) {
 app.get('/booth', function (req, res) {
   pictures = fs.readdirSync(config.save.dir).reverse().slice(config.booth.limit -1);
   console.log('booth request picture list')
-  res.render('booth', {type:"booth",mode:config.mode, pictures: pictures})
+  res.render('booth', {type:"booth",mode:config.mode, pictures: pictures, booth:1})
 });
 
 app.get('/cmd', function (req, res) {

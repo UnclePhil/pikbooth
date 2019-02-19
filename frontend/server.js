@@ -20,6 +20,16 @@ var config = {
     dir: "/pictures/", 
     prefix: "pikbooth-",
     ext: "jpg"
+  },
+  booth:{
+    limit: 20
+  },
+  client:{
+    limit: 20
+  },
+  cmd:{
+    limit: 5,
+    token: "1961"
   }, 
   mode:"dev"   
 }
@@ -28,6 +38,10 @@ config.save.dir = process.env.PIKBOOTH_SAVE_DIR || "/pictures/" ;
 config.save.prefix = process.env.PIKBOOTH_SAVE_PREFIX || "pikbooth-" ;
 config.save.ext = process.env.PIKBOOTH_SAVE_EXT || "jpg" ;
 config.mode = process.env.PIKBOOTH_MODE || "dev" ;
+config.booth.limit = process.env.PIKBOOTH_BOOTH_LIMIT || 20 ;
+config.client.limit = process.env.PIKBOOTH_CLIENT_LIMIT || 20 ;
+config.cmd.limit = process.env.PIKBOOTH_CMD_LIMIT || 5 ;
+config.cmd.token = process.env.PIKBOOTH_CMD_TOKEN || 1961 ;
 //-------------------------------------------------
 
 var mime = {
@@ -43,14 +57,14 @@ var mime = {
 // root booth file
 app.get('/', function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
-  console.log('picture list: '+pictures)
+  console.log('client request picture list')
   res.render('client', {pictures: pictures})
 });
 
 // booth 
 app.get('/booth', function (req, res) {
-  pictures = fs.readdirSync(config.save.dir);
-  console.log('picture list: '+pictures)
+  pictures = fs.readdirSync(config.save.dir).reverse();
+  console.log('booth request picture list')
   res.render('booth', {pictures: pictures, mode:config.mode})
 });
 
@@ -91,7 +105,7 @@ app.get('/photo', function (req, res) {
 
 // list all pictures
 app.get('/pict', function (req, res) {
-  pictures = fs.readdirSync(config.save.dir);
+  pictures = fs.readdirSync(config.save.dir).reverse();
   console.log('picture list: '+pictures)
   res.writeHead(200, {'Content-Type': 'application/json' });
   res.send(pictures);

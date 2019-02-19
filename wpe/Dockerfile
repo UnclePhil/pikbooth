@@ -1,5 +1,6 @@
 FROM petrosagg/resin-wpe:raspberrypi3-30c7465
 
+RUN apk update && apk add timeout && rm -rf /var/cache/apk/*
 COPY wait-for-it.sh /wait-for-it.sh
 COPY udev-rules/ /etc/udev/rules.d/
 COPY wpe-init /wpe-init

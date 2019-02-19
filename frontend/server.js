@@ -11,7 +11,17 @@ var dateFormat = require('dateformat');
 app.use(express.static('assets'));
 
 // enable template engines
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+//app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main', 
+  helpers: {
+    toJSON : function(object) {
+      return JSON.stringify(object);
+    }
+  }
+}));
+
 app.set('view engine', 'handlebars');
 
 //config definition

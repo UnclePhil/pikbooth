@@ -17,7 +17,7 @@ services:
       - "80:80"
   wpe:
     build: ./wpe
-    depends_on:
-      - proxy
-      - frontend
+    environment:
+      WAIT_BEFORE_HOSTS: 30
+      WAIT_HOSTS: frontend:3000
     privileged: true

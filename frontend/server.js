@@ -54,20 +54,26 @@ var mime = {
 // ROUTES
 ////////////////////////////////////////
 
-// root booth file
+// root go to client page
 app.get('/', function (req, res) {
-  pictures = fs.readdirSync(config.save.dir).reverse().slice(config.client.limit -1);
+  pictures = fs.readdirSync(config.save.dir).reverse().slice(config.client.limit-1);
+  console.log('client request picture list')
+  res.render('client', {type:"client",mode:config.mode, pictures: pictures})
+});
+app.get('/client', function (req, res) {
+  pictures = fs.readdirSync(config.save.dir).reverse().slice(config.client.limit-1);
   console.log('client request picture list')
   res.render('client', {type:"client",mode:config.mode, pictures: pictures})
 });
 
-// booth 
+// booth go to booth page 
 app.get('/booth', function (req, res) {
-  pictures = fs.readdirSync(config.save.dir).reverse().slice(config.booth.limit -1);
+  pictures = fs.readdirSync(config.save.dir).reverse().slice(config.booth.limit-1);
   console.log('booth request picture list')
   res.render('booth', {type:"booth",mode:config.mode, pictures: pictures, booth:1})
 });
 
+//cm go to command page
 app.get('/cmd', function (req, res) {
   pictures = fs.readdirSync(config.save.dir).reverse().slice(config.client.limit -1);
   console.log('cmd request picture list')
@@ -78,7 +84,7 @@ app.get('/cmd', function (req, res) {
 app.get('/infos', function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
   console.log('picture list: '+pictures)
-  res.render('infos', {type:"infos",mode:config.mode, count: pictures.length, config:config })
+  res.render('infos', {type:"booth",mode:config.mode, count: pictures.length, config:config })
 });
 
 

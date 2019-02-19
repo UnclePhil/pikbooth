@@ -56,26 +56,26 @@ var mime = {
 
 // root go to client page
 app.get('/', function (req, res) {
-  pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.client.limit-1);
+  pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.client.limit);
   console.log('client request picture list')
   res.render('client', {type:"client",mode:config.mode, pictures: pictures})
 });
 app.get('/client', function (req, res) {
-  pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.client.limit-1);
+  pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.client.limit);
   console.log('client request picture list')
   res.render('client', {type:"client",mode:config.mode, pictures: pictures})
 });
 
 // booth go to booth page 
 app.get('/booth', function (req, res) {
-  pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.booth.limit-1);
+  pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.booth.limit);
   console.log('booth request picture list')
   res.render('booth', {type:"booth",mode:config.mode, pictures: pictures, booth:1})
 });
 
 //cm go to command page
 app.get('/cmd', function (req, res) {
-  pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.cmd.limit-1);
+  pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.cmd.limit);
   console.log('cmd request picture list')
   res.render('cmd', {type:"cmd",mode:config.mode, pictures: pictures})
 });

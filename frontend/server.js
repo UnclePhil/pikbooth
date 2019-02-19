@@ -89,7 +89,8 @@ app.get('/infos', function (req, res) {
 
 
 // take the picture
-app.get('/photo', function (req, res) {
+app.get('/photo/:ret', function (req, res) {
+  var ret = req.params.ret;
   var exec = require('child_process').exec;
   // picture definition
   var now = new Date();
@@ -101,7 +102,7 @@ app.get('/photo', function (req, res) {
   if (config.mode=="dev") {
     fs.createReadStream('./fake/fake.jpg').pipe(fs.createWriteStream(fullname));
     console.log(`Fake click happens `);
-    res.redirect('/');
+    res.redirect('/'+ret);
   }
   else {
     exec('gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"', (err, stdout, stderr) => {
@@ -110,7 +111,7 @@ app.get('/photo', function (req, res) {
         return;
       }
       console.log('Click happens '+fullname);
-      res.redirect('/');
+      res.redirect('/'+ret);
     });
   } 
 });

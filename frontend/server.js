@@ -56,23 +56,29 @@ var mime = {
 
 // root booth file
 app.get('/', function (req, res) {
-  pictures = fs.readdirSync(config.save.dir);
+  pictures = fs.readdirSync(config.save.dir).reverse().slice(config.client.limit -1);
   console.log('client request picture list')
-  res.render('client', {pictures: pictures})
+  res.render('client', {type:"client",mode:config.mode, pictures: pictures})
 });
 
 // booth 
 app.get('/booth', function (req, res) {
-  pictures = fs.readdirSync(config.save.dir).reverse();
+  pictures = fs.readdirSync(config.save.dir).reverse().slice(config.booth.limit -1);
   console.log('booth request picture list')
-  res.render('booth', {pictures: pictures, mode:config.mode})
+  res.render('booth', {type:"booth",mode:config.mode, pictures: pictures})
+});
+
+app.get('/cmd', function (req, res) {
+  pictures = fs.readdirSync(config.save.dir).reverse().slice(config.client.limit -1);
+  console.log('cmd request picture list')
+  res.render('cmd', {type:"cmd",mode:config.mode, pictures: pictures})
 });
 
 
 app.get('/infos', function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
   console.log('picture list: '+pictures)
-  res.render('infos', {count: pictures.length, config:config })
+  res.render('infos', {type:"infos",mode:config.mode, count: pictures.length, config:config })
 });
 
 

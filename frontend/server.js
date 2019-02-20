@@ -6,10 +6,6 @@ var hbs  = require('express-handlebars');
 var dateFormat = require('dateformat');
 var os = require( 'os' );
 
-
-
-console.log( networkInterfaces );
-
 // Enable static CSS styles
 app.use(express.static('assets'));
 

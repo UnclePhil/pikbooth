@@ -4,6 +4,11 @@ var path = require('path');
 fs = require('fs');
 var hbs  = require('express-handlebars');
 var dateFormat = require('dateformat');
+var os = require( 'os' );
+
+
+
+console.log( networkInterfaces );
 
 // Enable static CSS styles
 app.use(express.static('assets'));
@@ -57,6 +62,8 @@ var mime = {
   svg: 'image/svg+xml'
 };
 
+var nw = os.networkInterfaces( );
+console.log (nw);
 // ROUTES
 ////////////////////////////////////////
 

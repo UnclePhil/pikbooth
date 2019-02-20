@@ -8,10 +8,28 @@
 <section>    
 <h2>Informations</h2>
 <h3>Pictures</h3>
-<p>count: {{count}}</p>
+<pre>
+       count: {{count}}
+</pre>
 </section>
 <section>
 <h3>Configuration</h3>
-{{toJSON config}}
+<pre>
+         dir: {{config.save.dir}}
+      prefix: {{config.save.prefix}}
+   extension: {{config.save.ext}}
+ booth limit: {{config.booth.limit}}
+client limit: {{config.client.limit}}
+   cmd limit: {{config.cmd.limit}}
+   cmd token: {{config.cmd.token}}
+        mode: {{config.mode}}}
+</pre>
+</section>
+<section>
+  <h3>Network</h3>
+<pre>
+          ip: my beautiful ip 
+</pre>
+
 </section>
 </div>

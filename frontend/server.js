@@ -2,17 +2,23 @@ var express = require('express');
 var app = express();
 var path = require('path');
 fs = require('fs');
-var exphbs  = require('express-handlebars');
-
-
+var hbs  = require('express-handlebars');
 var dateFormat = require('dateformat');
 
 // Enable static CSS styles
 app.use(express.static('assets'));
 
 // enable template engines
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
+app.engine( 'hbs', hbs( { 
+  extname: 'hbs', 
+  defaultLayout: 'main', 
+  layoutsDir: __dirname + '/views/layouts/',
+  partialsDir: __dirname + '/views/partials/'
+} ) );
+
+app.set( 'view engine', 'hbs' );
+
+
 
 //config definition
 var config = { 

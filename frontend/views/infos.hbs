@@ -1,35 +1,40 @@
+
+{{>boothheader}}
 <style>
   .infos {
     margin-top: 60px;
   }
 </style>  
+<main>
+  <div class="infos container">
+    <section>    
+    <h1>Informations</h1>
+    <h3>Pictures</h3>
+    <pre>
+          count: {{count}}
+           last: {{lastpict}}
+    </pre>
+    </section>
+    <section>
+    <h3>Configuration</h3>
+    <pre>
+            dir: {{config.save.dir}}
+          prefix: {{config.save.prefix}}
+      extension: {{config.save.ext}}
+    booth limit: {{config.booth.limit}}
+    client limit: {{config.client.limit}}
+      cmd limit: {{config.cmd.limit}}
+      cmd token: {{config.cmd.token}}
+            mode: {{config.mode}}
+    </pre>
+    </section>
+    <section>
+      <h3>Network</h3>
+    <pre>
+              ip: my beautiful ip 
+    </pre>
 
-<div class="infos container">
-<section>    
-<h2>Informations</h2>
-<h3>Pictures</h3>
-<pre>
-       count: {{count}}
-</pre>
-</section>
-<section>
-<h3>Configuration</h3>
-<pre>
-         dir: {{config.save.dir}}
-      prefix: {{config.save.prefix}}
-   extension: {{config.save.ext}}
- booth limit: {{config.booth.limit}}
-client limit: {{config.client.limit}}
-   cmd limit: {{config.cmd.limit}}
-   cmd token: {{config.cmd.token}}
-        mode: {{config.mode}}
-</pre>
-</section>
-<section>
-  <h3>Network</h3>
-<pre>
-          ip: my beautiful ip 
-</pre>
-
-</section>
-</div>
+    </section>
+  </div>
+</main>
+{{>boothfooter}}

@@ -89,8 +89,11 @@ app.get('/cmd', function (req, res) {
 
 app.get('/infos', function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
-  console.log('picture list: '+pictures)
-  res.render('infos', {type:"booth",mode:config.mode, count: pictures.length, config:config })
+  count = pictures.lenght
+  lastpict=picture.reverse()[0];
+  ip="111.222.333.444" ;
+  console.log('info picture list: '+pictures)
+  res.render('infos', {type:"booth",mode:config.mode, count: count, lastpict:lastpict ,config:config, ip:ip })
 });
 
 

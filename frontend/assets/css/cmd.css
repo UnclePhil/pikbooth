@@ -1,4 +1,30 @@
-.cards {
+  html body {
+    height: 100%;
+    overflow: hidden;
+  }
+  header {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 56px;
+  }
+  main  {
+    position: absolute;
+    top: 56px;
+    bottom: 56px;
+    right: 0;
+    left: 0;
+    overflow-y: auto;
+  }
+  footer {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 56px;
+  }
+  .cards {
     margin-top: 60px;
     display: flex;
     flex-wrap: wrap;
@@ -14,4 +40,7 @@
   }
   .msg {
     
+  }
+  html {
+    height: 100%;
   }

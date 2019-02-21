@@ -6,8 +6,9 @@ var hbs  = require('express-handlebars');
 var dateFormat = require('dateformat');
 var os = require( 'os' );
 
-// Enable static CSS styles
+// Enable static CSS styles & js
 app.use(express.static('assets'));
+
 
 // enable template engines
 app.engine( 'hbs', hbs( { 
@@ -18,6 +19,14 @@ app.engine( 'hbs', hbs( {
 } ) );
 
 app.set( 'view engine', 'hbs' );
+
+// define nocache middleware for some url
+function nocache(req, res, next) {
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+  next();
+}
 
 
 
@@ -64,33 +73,33 @@ console.log (nw);
 ////////////////////////////////////////
 
 // root go to client page
-app.get('/', function (req, res) {
+app.get('/', nocache ,function (req, res) {
   pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.client.limit);
   console.log('client request picture list')
   res.render('client', {type:"client",mode:config.mode, pictures: pictures})
 });
-app.get('/client', function (req, res) {
+app.get('/client',nocache, function (req, res) {
   pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.client.limit);
   console.log('client request picture list')
   res.render('client', {type:"client",mode:config.mode, pictures: pictures})
 });
 
 // booth go to booth page 
-app.get('/booth', function (req, res) {
+app.get('/booth',nocache, function (req, res) {
   pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.booth.limit);
   console.log('booth request picture list')
   res.render('booth', {type:"booth",mode:config.mode, pictures: pictures, booth:1})
 });
 
 //cm go to command page
-app.get('/cmd', function (req, res) {
+app.get('/cmd', nocache, function (req, res) {
   pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.cmd.limit);
   console.log('cmd request picture list')
   res.render('cmd', {type:"cmd",mode:config.mode, pictures: pictures})
 });
 
 
-app.get('/infos', function (req, res) {
+app.get('/infos', nocache, function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
   count = pictures.lenght
   lastpict = pictures.reverse()[0];

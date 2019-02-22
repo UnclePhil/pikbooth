@@ -171,3 +171,14 @@ var server = app.listen(80, function () {
   console.log('Example app listening on port ', port);
 
 });
+
+var io = require('socket.io')(server);
+
+io.on('connection', function(client) {
+  console.log('SomeOne connected...');
+  
+  client.on('join', function(data) {
+    console.log(data);
+  });
+
+});

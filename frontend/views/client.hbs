@@ -1,13 +1,9 @@
 {{>clientheader}}
+<div id="msg">
+  <h2>No picture for the moment</h2>
+</div>  
+
 <main class="cards">
-  {{#if pictures}}
-    {{#each pictures}}
-        <img src="/pict/{{this}}" >
-    {{/each}}  
-  {{else}}
-  <div class="msg">
-    <h2>No picture for the moment</h2>
-  </div>  
-  {{/if}}
 </main>
+
 {{>clientfooter}}

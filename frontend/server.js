@@ -33,7 +33,7 @@ function nocache(req, res, next) {
 //config definition
 var config = { 
   save:{
-    dir: "/pictures/", 
+    dir: "./pictures/", 
     prefix: "pikbooth-",
     ext: "jpg"
   },
@@ -50,7 +50,7 @@ var config = {
   mode:"dev"   
 }
 // overwrtie by env var
-config.save.dir = process.env.PIKBOOTH_SAVE_DIR || "/pictures/" ;
+config.save.dir = process.env.PIKBOOTH_SAVE_DIR || "./pictures/" ;
 config.save.prefix = process.env.PIKBOOTH_SAVE_PREFIX || "pikbooth-" ;
 config.save.ext = process.env.PIKBOOTH_SAVE_EXT || "jpg" ;
 config.mode = process.env.PIKBOOTH_MODE || "dev" ;
@@ -68,34 +68,26 @@ var mime = {
 };
 
 var nw = os.networkInterfaces( );
-console.log (nw);
+//console.log (nw);
 // ROUTES
 ////////////////////////////////////////
 
 // root go to client page
 app.get('/', nocache ,function (req, res) {
-  pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.client.limit);
-  console.log('client request picture list')
-  res.render('client', {type:"client",mode:config.mode, pictures: pictures})
+  res.render('client', {type:"client",mode:config.mode})
 });
 app.get('/client',nocache, function (req, res) {
-  pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.client.limit);
-  console.log('client request picture list')
-  res.render('client', {type:"client",mode:config.mode, pictures: pictures})
+  res.render('client', {type:"client",mode:config.mode})
 });
 
 // booth go to booth page 
 app.get('/booth',nocache, function (req, res) {
-  pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.booth.limit);
-  console.log('booth request picture list')
-  res.render('booth', {type:"booth",mode:config.mode, pictures: pictures, booth:1})
+  res.render('booth', {type:"booth",mode:config.mode, booth:1})
 });
 
 //cm go to command page
 app.get('/cmd', nocache, function (req, res) {
-  pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.cmd.limit);
-  console.log('cmd request picture list')
-  res.render('cmd', {type:"cmd",mode:config.mode, pictures: pictures})
+  res.render('cmd', {type:"cmd",mode:config.mode})
 });
 
 
@@ -110,8 +102,7 @@ app.get('/infos', nocache, function (req, res) {
 
 
 // take the picture
-app.get('/photo/:ret', function (req, res) {
-  var ret = req.params.ret;
+function fire(){
   var exec = require('child_process').exec;
   // picture definition
   var now = new Date();
@@ -122,20 +113,19 @@ app.get('/photo/:ret', function (req, res) {
   console.log(`try to take picture ${fullname}`);
   if (config.mode=="dev") {
     fs.createReadStream('./fake/fake.jpg').pipe(fs.createWriteStream(fullname));
-    console.log(`Fake click happens `);
-    res.redirect('/'+ret);
+    console.log(`Fake picture `+pictname);
   }
   else {
     exec('gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"', (err, stdout, stderr) => {
       if (err) {
         console.error('Gphoto exec error: '+err);
-        return;
+        return null;
       }
-      console.log('Click happens '+fullname);
-      res.redirect('/'+ret);
+      console.log('Real picture '+pictname);
     });
-  } 
-});
+  }
+  return pictname; 
+}
 
 // list all pictures
 app.get('/pict', function (req, res) {
@@ -164,7 +154,7 @@ app.get('/pict/:pict', function (req, res) {
 
 
 //start a server on port 80 and log its start to our console
-var server = app.listen(80, function () {
+var server = app.listen(3000, function () {
 
   var port = server.address().port;
   console.log ('starting mode: '+config.mode)
@@ -174,11 +164,28 @@ var server = app.listen(80, function () {
 
 var io = require('socket.io')(server);
 
+
 io.on('connection', function(client) {
-  console.log('SomeOne connected...');
+  console.log(client.id+': is now connected');
   
   client.on('join', function(data) {
-    console.log(data);
+    pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.booth.limit);
+    io.to(client.id).emit('allpicts', pictures);
+    console.log(client.id+": "+data);
   });
+
+  client.on('fire', function(data) {
+    console.log(client.id+": "+data)
+    picture = fire() ;
+    if (picture) {
+      io.emit('newpict', picture);
+      console.log("broadcast the pitcure");
+    }
+    else {
+      io.to(client.id).emit('error', "Seems we have an error during the picture taking");
+    }
+  });
+ 
+
 
 });

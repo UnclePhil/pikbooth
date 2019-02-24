@@ -110,7 +110,6 @@ function fire(){
   var pictname= config.save.prefix+dt+"."+config.save.ext;
   var fullname = config.save.dir+pictname;
 
-  console.log(`try to take picture ${fullname}`);
   if (config.mode=="dev") {
     fs.createReadStream('./fake/fake.jpg').pipe(fs.createWriteStream(fullname));
     console.log(`Fake picture `+pictname);
@@ -166,12 +165,17 @@ var io = require('socket.io')(server);
 
 
 io.on('connection', function(client) {
-  console.log(client.id+': is now connected');
+  console.log(client.id+': Connected');
   
   client.on('join', function(data) {
     pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.booth.limit);
+    if (pictures.lenght != 0){
     io.to(client.id).emit('allpicts', pictures);
-    console.log(client.id+": "+data);
+    console.log(client.id+": push pictures");
+    }
+    else {
+      console.log('no pictures to send');
+    }
   });
 
   client.on('fire', function(data) {
@@ -179,7 +183,7 @@ io.on('connection', function(client) {
     picture = fire() ;
     if (picture) {
       io.emit('newpict', picture);
-      console.log("broadcast the pitcure");
+      console.log("broadcast the picture");
     }
     else {
       io.to(client.id).emit('error', "Seems we have an error during the picture taking");

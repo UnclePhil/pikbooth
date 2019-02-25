@@ -23,22 +23,30 @@
     });
 
     socket.on('allpicts', function(picts){ 
-        $( "#pop" ).hide();
-        $( "#msg" ).hide();
-        $( "main" ).empty();
-        for (i = 0; i < picts.length; i++) {
-            var url = "/pict/"+picts[i];
-            var html = '<img src="'+url+'"></img>'
-            $('main').append(html);
+        if (picts.lenght > 0 ){
+          $( "#pop" ).hide();
+          $( "#msg" ).hide();
+          $( "main" ).empty();
+          for (i = 0; i < picts.length; i++) {
+              var url = "/pict/"+picts[i];
+              var html = '<img src="'+url+'"></img>'
+              $('main').append(html);
+          }
+        }
+        else {
+          $( "#msg" ).show();
+          $( "main" ).empty();
         }
     });
 
-    socket.on('newpict', function(pict){ 
+    socket.on('newpict', function(pict){
             console.log("receive new picture "+pict)
+            $( "#msg" ).hide();
             var url = "/pict/"+pict;
             var html = '<img src="'+url+'"></img>'
             $('main').prepend(html);
     });
+
     socket.on('error', function(msg){ 
         console.log (msg)
     });

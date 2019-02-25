@@ -129,7 +129,7 @@ function fire(){
 // list all pictures
 app.get('/pict', function (req, res) {
   pictures = fs.readdirSync(config.save.dir).reverse();
-  console.log('picture list: '+pictures)
+  console.log('picture list: ')
   res.writeHead(200, {'Content-Type': 'application/json' });
   res.send(pictures);
 });
@@ -169,13 +169,8 @@ io.on('connection', function(client) {
   
   client.on('join', function(data) {
     pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.booth.limit);
-    if (pictures.lenght != 0){
     io.to(client.id).emit('allpicts', pictures);
-    console.log(client.id+": push pictures");
-    }
-    else {
-      console.log('no pictures to send');
-    }
+    console.log(client.id+": push "+pictures.lenght);
   });
 
   client.on('fire', function(data) {

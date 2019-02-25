@@ -9,6 +9,7 @@ socket.on('connect', function(data) {
 });
 
 socket.on('allpicts', function(picts){ 
+    if (picts.lenght > 0){
     $( "#msg" ).hide();
     $( "main" ).empty();
     for (i = 0; i < picts.length; i++) {
@@ -16,13 +17,19 @@ socket.on('allpicts', function(picts){
         var html = '<img src="'+url+'"></img>'
         $('main').append(html);
     }
+    }
+    else {
+        $( "#msg" ).show();
+    }
 });
 
 socket.on('newpict', function(pict){ 
-        console.log("receive new picture "+pict)
-        var url = "/pict/"+pict;
-        var html = '<img src="'+url+'"></img>'
-        $('main').prepend(html);
+    $( "#pop" ).hide();
+    $( "#msg" ).hide();
+    console.log("receive new picture "+pict)
+    var url = "/pict/"+pict;
+    var html = '<img src="'+url+'"></img>'
+    $('main').prepend(html);
 });
 socket.on('error', function(msg){ 
     console.log (msg)

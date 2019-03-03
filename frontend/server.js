@@ -161,11 +161,11 @@ io.on('connection', function(client) {
   client.on('join', function(data) {
     var pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.booth.limit);
     io.to(client.id).emit('allpicts', pictures);
-    console.log(client.id+"("+data+") push pictures");
+    console.log(client.id+": ("+data+") push pictures");
   });
 
   client.on('fire', function(data) {
-    console.log(client.id+" ("+data+") fire a picture")
+    console.log(client.id+": ("+data+") fire a picture")
     picture = fire() ;
     if (picture) {
       io.emit('newpict', picture);

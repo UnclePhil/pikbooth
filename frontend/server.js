@@ -147,8 +147,8 @@ function fire(){
 var server = app.listen(3000, function () {
 
   var port = server.address().port;
-  console.log ('starting mode: '+config.mode)
-  console.log('Example app listening on port ', port);
+  console.log('PiKBooth frontend listening on port ', port);
+  console.log('Config: '+config);
 
 });
 

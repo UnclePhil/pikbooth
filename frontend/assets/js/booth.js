@@ -23,7 +23,7 @@
     });
 
     socket.on('allpicts', function(picts){ 
-      if (picts.lenght > 0) {
+      if (picts.length > 0) {
         $( "#pop" ).hide();
         $( "#msg" ).hide();
         $( "main" ).empty();

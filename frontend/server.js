@@ -90,6 +90,22 @@ app.get('/cmd', nocache, function (req, res) {
   res.render('cmd', {type:"cmd",mode:config.mode})
 });
 
+// get one pictures
+app.get('/pict/:pict', function (req, res) {
+  
+  var file = req.params.pict;
+  var type = mime[path.extname(file).slice(1)] || 'text/plain';
+  var s = fs.createReadStream(config.save.dir+file);
+  s.on('open', function () {
+      res.set('Content-Type', type);
+      s.pipe(res);
+  });
+  s.on('error', function () {
+      res.set('Content-Type', 'text/plain');
+      res.status(404).end('Not found');
+  });
+
+});
 
 app.get('/infos', nocache, function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
@@ -126,31 +142,6 @@ function fire(){
   return pictname; 
 }
 
-// list all pictures
-app.get('/pict', function (req, res) {
-  pictures = fs.readdirSync(config.save.dir).reverse();
-  console.log('picture list: '+pictures)
-  res.writeHead(200, {'Content-Type': 'application/json' });
-  res.send(pictures);
-});
-
-// get one pictures
-app.get('/pict/:pict', function (req, res) {
-  
-  var file = req.params.pict;
-  var type = mime[path.extname(file).slice(1)] || 'text/plain';
-  var s = fs.createReadStream(config.save.dir+file);
-  s.on('open', function () {
-      res.set('Content-Type', type);
-      s.pipe(res);
-  });
-  s.on('error', function () {
-      res.set('Content-Type', 'text/plain');
-      res.status(404).end('Not found');
-  });
-
-});
-
 
 //start a server on port 80 and log its start to our console
 var server = app.listen(3000, function () {
@@ -168,14 +159,9 @@ io.on('connection', function(client) {
   console.log(client.id+': Connected');
   
   client.on('join', function(data) {
-    pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.booth.limit);
-    if (pictures.lenght != 0){
+    var pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.booth.limit);
     io.to(client.id).emit('allpicts', pictures);
     console.log(client.id+": push pictures");
-    }
-    else {
-      console.log('no pictures to send');
-    }
   });
 
   client.on('fire', function(data) {

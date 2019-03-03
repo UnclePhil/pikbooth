@@ -9,7 +9,7 @@ socket.on('connect', function(data) {
 });
 
 socket.on('allpicts', function(picts){ 
-    if (picts.lenght > 0) {
+    if (picts.length > 0) {
         $( "#msg" ).hide();
         $( "main" ).empty();
         for (i = 0; i < picts.length; i++) {

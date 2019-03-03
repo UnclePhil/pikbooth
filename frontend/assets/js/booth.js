@@ -60,6 +60,7 @@ function clearpop() {
 
 function finish() {
   clearInterval(intervalId);
+  counter = 4;
   $("#pop").hide();
 }
 

@@ -148,7 +148,7 @@ var server = app.listen(3000, function () {
 
   var port = server.address().port;
   console.log('PiKBooth frontend listening on port ', port);
-  console.log('Config: '+config);
+  console.log('Config: '+JSON.stringify(config));
 
 });
 

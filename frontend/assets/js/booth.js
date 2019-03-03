@@ -19,7 +19,7 @@
     var socket = io.connect(window.location.origin);
 
     socket.on('connect', function(data) {
-    	socket.emit('join', 'Booth request all pictures');
+    	socket.emit('join', 'Booth');
     });
 
     socket.on('allpicts', function(picts){ 

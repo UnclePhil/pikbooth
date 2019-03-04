@@ -49,6 +49,10 @@
     socket.on('error', function(msg){ 
         console.log (msg)
     });
+    socket.on('cmdfire', function() {
+    	firepicture();
+    });
+
 
 // counting before picture
 var counter = 4;

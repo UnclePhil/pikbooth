@@ -36,6 +36,10 @@ socket.on('error', function(msg){
 });
 
 
-function firepicture() {
-    socket.emit('fire', 'Cmd fire new pictures');
+function fire() {
+    socket.emit('fire', 'Cmd fire direct pictures');
+}
+
+function cmdfire() {
+    socket.emit('cmdfire', 'Cmd fire new pictures');
 }

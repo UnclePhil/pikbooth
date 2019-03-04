@@ -176,7 +176,6 @@ io.on('connection', function(client) {
       io.to(client.id).emit('error', "Seems we have an error during the picture taking");
     }
   });
- 
 
 
 });

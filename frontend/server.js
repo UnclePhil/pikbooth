@@ -124,10 +124,11 @@ function fire(){
   var now = new Date();
   var dt = dateFormat(now,"yyyymmdd-HHMMss" );
   var pictname= config.save.prefix+dt+"."+config.save.ext;
-  var fullname = config.save.dir+pictname;
+  var fullname = path.join(config.save.dir,pictname);
 
   if (config.mode=="dev") {
-    fs.createReadStream('./fake/fake.jpg').pipe(fs.createWriteStream(fullname));
+    tpl=path.join('./fake','fake.jpg')
+    fs.createReadStream(tpl).pipe(fs.createWriteStream(fullname));
     console.log(`Fake picture in`+fullname);
   }
   else {

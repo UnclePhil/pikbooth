@@ -176,6 +176,11 @@ io.on('connection', function(client) {
       io.to(client.id).emit('error', "Seems we have an error during the picture taking");
     }
   });
+  client.on('cmdfire', function(data) {
+    console.log(client.id+": ("+data+") fire a picture")
+    io.emit('firebycmd');
+  });
+
 
 
 });

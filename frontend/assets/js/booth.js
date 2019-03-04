@@ -49,7 +49,7 @@
     socket.on('error', function(msg){ 
         console.log (msg)
     });
-    socket.on('cmdfire', function() {
+    socket.on('firebycmd', function() {
     	firepicture();
     });
 

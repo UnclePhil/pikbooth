@@ -26,15 +26,16 @@
   }
   #pop {
       background-color:#FFFFFF;
+      opacity: 0.8;
       border:5px solid #999999;
       cursor:default;
       display:none;
-      margin-top: 100px;
-      margin-bottom: 100px;
+      margin-top: 0;
+      margin-bottom: 0;
       position:absolute;
       text-align:left;
-      width:90%;
-      height:80%
+      width:100vw;
+      height:100vh
       z-index:50;
       padding: 25px 25px 20px;
       color: firebrick;

@@ -128,7 +128,7 @@ function fire(){
 
   if (config.mode=="dev") {
     fs.createReadStream('./fake/fake.jpg').pipe(fs.createWriteStream(fullname));
-    console.log(`Fake picture `+pictname);
+    console.log(`Fake picture in`+fullname);
   }
   else {
     exec('gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"', (err, stdout, stderr) => {

@@ -160,7 +160,7 @@ io.on('connection', function(client) {
   console.log(client.id+': Connected');
   
   client.on('join', function(data) {
-    var pictures = fs.readdirSync(config.save.dir).reverse().slice(0,config.booth.limit);
+    var pictures = fs.readdirSync(path.join(config.save.dir)).reverse().slice(0,config.booth.limit);
     io.to(client.id).emit('allpicts', pictures);
     console.log(client.id+": ("+data+") push pictures");
   });

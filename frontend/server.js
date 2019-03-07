@@ -130,6 +130,7 @@ function fire(){
     tpl=path.join('./fake','fake.jpg')
     fs.createReadStream(tpl).pipe(fs.createWriteStream(fullname));
     console.log(`Fake picture in`+fullname);
+    return pictname;
   }
   else {
     exec('gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"', (err, stdout, stderr) => {
@@ -137,10 +138,12 @@ function fire(){
         console.error('Gphoto exec error: '+err);
         return null;
       }
-      console.log('Real picture '+pictname);
+      else {
+        console.log('Real picture '+pictname);
+        return pictname;
+      }
     });
   }
-  return pictname; 
 }
 
 

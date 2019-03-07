@@ -130,17 +130,17 @@ function fire(){
     tpl=path.join('./fake','fake.jpg')
     fs.createReadStream(tpl).pipe(fs.createWriteStream(fullname));
     console.log(`Fake picture in`+fullname);
-    return pictname;
+    io.emit('newpict', pictname);
   }
   else {
     exec('gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"', (err, stdout, stderr) => {
       if (err) {
         console.error('Gphoto exec error: '+err);
-        return null;
+        io.to(client.id).emit('error', "Seems we have an error during the picture taking")
       }
       else {
         console.log('Real picture '+pictname);
-        return pictname;
+        io.emit('newpict', pictname);
       }
     });
   }
@@ -170,14 +170,7 @@ io.on('connection', function(client) {
 
   client.on('fire', function(data) {
     console.log(client.id+": ("+data+") fire a picture")
-    picture = fire() ;
-    if (picture) {
-      io.emit('newpict', picture);
-      console.log("broadcast the picture");
-    }
-    else {
-      io.to(client.id).emit('error', "Seems we have an error during the picture taking");
-    }
+    fire() ;
   });
   client.on('cmdfire', function(data) {
     console.log(client.id+": ("+data+") fire a picture")

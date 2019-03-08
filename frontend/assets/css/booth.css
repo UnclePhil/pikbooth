@@ -1,6 +1,6 @@
 
   body{
-    background-color: dimgrey
+    background-color: dimgrey;
   }
   main {
     background-color:#FFFFFF; 
@@ -36,7 +36,7 @@
       position:absolute;
       text-align:left;
       width:100vw;
-      height:100vh
+      height:100vh;
       z-index:50;
       padding: 25px 25px 20px;
       color: firebrick;

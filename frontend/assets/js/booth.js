@@ -41,7 +41,6 @@
     socket.on('newpict', function(pict){ 
       $( "#pop" ).hide();
       $( "#msg" ).hide();
-      console.log("receive new picture "+pict)
       var url = "/pict/"+pict;
       var html = '<img src="'+url+'"></img>'
       $('main').prepend(html);

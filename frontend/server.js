@@ -160,7 +160,7 @@ function fire(){
         io.to(client.id).emit('error', "Seems we have an error during the picture taking")
       }
       else {
-        thumbnail.ensureThumbnail(pictname, onfig.booth.thwidth, null, function (err, filename) {
+        thumbnail.ensureThumbnail(pictname, config.booth.thwidth, null, function (err, filename) {
           if (err) {
             console.error('thumbnal exec error: '+err);
             io.to(client.id).emit('error', "Seems we have an error during the picture transformation")

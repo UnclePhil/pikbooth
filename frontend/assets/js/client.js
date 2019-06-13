@@ -13,7 +13,7 @@ socket.on('allpicts', function(picts){
     $( "#msg" ).hide();
     $( "main" ).empty();
     for (i = 0; i < picts.length; i++) {
-        var url = "/pict/"+picts[i];
+        var url = "/thumb/"+picts[i];
         var html = '<img src="'+url+'"></img>'
         $('main').append(html);
     }
@@ -27,7 +27,7 @@ socket.on('newpict', function(pict){
     $( "#pop" ).hide();
     $( "#msg" ).hide();
     console.log("receive new picture "+pict)
-    var url = "/pict/"+pict;
+    var url = "/thumb/"+pict;
     var html = '<img src="'+url+'"></img>'
     $('main').prepend(html);
 });

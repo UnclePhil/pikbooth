@@ -5,6 +5,7 @@ fs = require('fs');
 var hbs  = require('express-handlebars');
 var dateFormat = require('dateformat');
 var os = require( 'os' );
+var Thumbnail = require('thumbnail');
 
 // Enable static CSS styles & js
 app.use(express.static('assets'));
@@ -55,10 +56,15 @@ config.save.prefix = process.env.PIKBOOTH_SAVE_PREFIX || "pikbooth-" ;
 config.save.ext = process.env.PIKBOOTH_SAVE_EXT || "jpg" ;
 config.mode = process.env.PIKBOOTH_MODE || "dev" ;
 config.booth.limit = process.env.PIKBOOTH_BOOTH_LIMIT || 20 ;
+config.booth.thwidth = process.env.PIKBOOTH_BOOTH_THWIDTH || 150 ;  // thumbnal width for booth
 config.client.limit = process.env.PIKBOOTH_CLIENT_LIMIT || 20 ;
 config.cmd.limit = process.env.PIKBOOTH_CMD_LIMIT || 5 ;
 config.cmd.token = process.env.PIKBOOTH_CMD_TOKEN || 1961 ;
+
 //-------------------------------------------------
+
+var thumbnail = new Thumbnail(config.save.dir, config.save.dir+'thumb/');
+
 
 var mime = {
   gif: 'image/gif',
@@ -106,6 +112,21 @@ app.get('/pict/:pict', function (req, res) {
   });
 
 });
+app.get('/thumb/:pict', function (req, res) {
+  
+  var file = req.params.pict;
+  var type = mime[path.extname(file).slice(1)] || 'text/plain';
+  var s = fs.createReadStream(config.save.dir+'thumb/'+file);
+  s.on('open', function () {
+      res.set('Content-Type', type);
+      s.pipe(res);
+  });
+  s.on('error', function () {
+      res.set('Content-Type', 'text/plain');
+      res.status(404).end('thumb Not found');
+  });
+
+});
 
 app.get('/infos', nocache, function (req, res) {
   pictures = fs.readdirSync(config.save.dir);
@@ -139,8 +160,17 @@ function fire(){
         io.to(client.id).emit('error', "Seems we have an error during the picture taking")
       }
       else {
-        console.log('Real picture '+pictname);
-        io.emit('newpict', pictname);
+        thumbnail.ensureThumbnail(pictname, onfig.booth.thwidth, null, function (err, filename) {
+          if (err) {
+            console.error('thumbnal exec error: '+err);
+            io.to(client.id).emit('error', "Seems we have an error during the picture transformation")
+          }
+          else {
+            console.log('OK Real picture '+pictname);
+            io.emit('newpict', pictname);
+          }
+        });
+        
       }
     });
   }

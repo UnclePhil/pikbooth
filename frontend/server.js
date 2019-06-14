@@ -159,9 +159,7 @@ function fire(cltid){
         io.to(cltid).emit('error', "Seems we have an error during the picture taking")
       }
       else {
-        sharp(fullname)
-        .resize(config.booth.thwidth, null)
-        .toFile(fullthumb, (err, info) => {
+        exec('cp '+fullname+' '+fullthumb, (err, stdout, stderr) => {
           if (err) {
             console.error('thumbnal exec error: '+err);
             io.to(cltid).emit('error', "Seems we have an error during the picture transformation")

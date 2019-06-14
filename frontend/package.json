@@ -22,7 +22,6 @@
     "dateformat": "*",
     "express": "*",
     "express-handlebars": "*",
-    "socket.io": "*",
-    "sharp":"*"
+    "socket.io": "*"
   }
 }

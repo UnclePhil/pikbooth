@@ -1,7 +1,7 @@
 {
-  "name": "simple-server-node",
+  "name": "pikbooth server",
   "version": "1.0.0",
-  "description": "A simple Expressjs Web server on balena",
+  "description": "An Expressjs server to pilot gphoto2",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,24 +9,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/balena-io-projects/simple-server-node.git"
+    "url": "git+https://github.com/unclephil/pikbooth"
   },
   "keywords": [
     "webserver",
     "nodejs",
     "expressjs"
   ],
-  "author": "Shaun Mulligan <shaun@balena.io>",
+  "author": "ph Koenig <koenigphil@gmail.com>",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/balena-io-projects/simple-server-node/issues"
-  },
-  "homepage": "https://github.com/balena-io-projects/simple-server-node#readme",
   "dependencies": {
     "dateformat": "*",
     "express": "*",
-    "express-handlebars": "^3.0.0",
-    "socket.io": "^2.2.0",
+    "express-handlebars": "*",
+    "socket.io": "*",
     "sharp":"*"
   }
 }

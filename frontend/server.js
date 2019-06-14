@@ -139,7 +139,7 @@ app.get('/infos', nocache, function (req, res) {
 
 
 // take the picture
-function fire(){
+function fire(cltid){
   var exec = require('child_process').exec;
   // picture definition
   var now = new Date();
@@ -157,13 +157,13 @@ function fire(){
     exec('gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"', (err, stdout, stderr) => {
       if (err) {
         console.error('Gphoto exec error: '+err);
-        io.to(client.id).emit('error', "Seems we have an error during the picture taking")
+        io.to(cltid).emit('error', "Seems we have an error during the picture taking")
       }
       else {
         thumbnail.ensureThumbnail(pictname, config.booth.thwidth, null, function (err, filename) {
           if (err) {
             console.error('thumbnal exec error: '+err);
-            io.to(client.id).emit('error', "Seems we have an error during the picture transformation")
+            io.to(cltid).emit('error', "Seems we have an error during the picture transformation")
           }
           else {
             console.log('OK Real picture '+pictname);
@@ -177,7 +177,8 @@ function fire(){
 }
 
 
-//start a server on port 80 and log its start to our console
+//start a server on port 3000 and log its start to our console
+// WEBSOCKET 
 var server = app.listen(3000, function () {
 
   var port = server.address().port;
@@ -200,7 +201,7 @@ io.on('connection', function(client) {
 
   client.on('fire', function(data) {
     console.log(client.id+": ("+data+") fire a picture")
-    fire() ;
+    fire(client.id) ;
   });
   client.on('cmdfire', function(data) {
     console.log(client.id+": ("+data+") fire a picture")

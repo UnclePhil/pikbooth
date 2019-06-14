@@ -5,7 +5,6 @@ fs = require('fs');
 var hbs  = require('express-handlebars');
 var dateFormat = require('dateformat');
 var os = require( 'os' );
-var sharp = require('sharp');
 
 // Enable static CSS styles & js
 app.use(express.static('assets'));

@@ -1,5 +1,5 @@
 {
-  "name": "pikboothServer",
+  "name": "pikbooth",
   "version": "1.0.0",
   "description": "An Expressjs server to pilot gphoto2",
   "main": "server.js",

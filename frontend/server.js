@@ -5,7 +5,7 @@ fs = require('fs');
 var hbs  = require('express-handlebars');
 var dateFormat = require('dateformat');
 var os = require( 'os' );
-var Thumbnail = require('thumbnail');
+var sharp = require('sharp');
 
 // Enable static CSS styles & js
 app.use(express.static('assets'));
@@ -62,8 +62,6 @@ config.cmd.limit = process.env.PIKBOOTH_CMD_LIMIT || 5 ;
 config.cmd.token = process.env.PIKBOOTH_CMD_TOKEN || 1961 ;
 
 //-------------------------------------------------
-
-var thumbnail = new Thumbnail(config.save.dir, config.save.dir+'thumb/');
 
 
 var mime = {
@@ -146,6 +144,7 @@ function fire(cltid){
   var dt = dateFormat(now,"yyyymmdd-HHMMss" );
   var pictname= config.save.prefix+dt+"."+config.save.ext;
   var fullname = path.join(config.save.dir,pictname);
+  var fullthumb = path.join(config.save.dir,"thumb/",pictname);
 
   if (config.mode=="dev") {
     tpl=path.join('./fake','fake.jpg')
@@ -160,7 +159,9 @@ function fire(cltid){
         io.to(cltid).emit('error', "Seems we have an error during the picture taking")
       }
       else {
-        thumbnail.ensureThumbnail(pictname, config.booth.thwidth, null, function (err, filename) {
+        sharp(fullname)
+        .resize(config.booth.thwidth, null)
+        .toFile(fullthumb, (err, info) => {
           if (err) {
             console.error('thumbnal exec error: '+err);
             io.to(cltid).emit('error', "Seems we have an error during the picture transformation")

@@ -62,6 +62,10 @@ config.cmd.token = process.env.PIKBOOTH_CMD_TOKEN || 1961 ;
 
 //-------------------------------------------------
 
+// check and create dir for picture & thumbnail
+fs.mkdirSync(config.save.dir)
+fs.mkdirSync(path.join(config.save.dir,"thumb/"))
+
 
 var mime = {
   gif: 'image/gif',
@@ -158,7 +162,8 @@ function fire(cltid){
         io.to(cltid).emit('error', "Seems we have an error during the picture taking")
       }
       else {
-        exec('cp '+fullname+' '+fullthumb, (err, stdout, stderr) => {
+        
+        exec("convert -strip -thumbnail '"+config.booth.thwidth+"x>' "+fullname+" "+fullthumb, (err, stdout, stderr) => {
           if (err) {
             console.error('thumbnal exec error: '+err);
             io.to(cltid).emit('error', "Seems we have an error during the picture transformation")

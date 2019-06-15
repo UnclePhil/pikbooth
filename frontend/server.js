@@ -66,7 +66,7 @@ config.cmd.token = process.env.PIKBOOTH_CMD_TOKEN || 1961 ;
 // check and create dir for picture & thumbnail
 exec("mkdir -p "+ path.join(config.save.dir,"thumb/"), (err, stdout, stderr) => {
   if (err) { console.log(err) }
-  else { console.log('Directory created) }
+  else { console.log('Directory created') }
 });
 
 

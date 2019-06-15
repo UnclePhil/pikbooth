@@ -5,6 +5,7 @@ fs = require('fs');
 var hbs  = require('express-handlebars');
 var dateFormat = require('dateformat');
 var os = require( 'os' );
+var exec = require('child_process').exec;
 
 // Enable static CSS styles & js
 app.use(express.static('assets'));
@@ -63,8 +64,10 @@ config.cmd.token = process.env.PIKBOOTH_CMD_TOKEN || 1961 ;
 //-------------------------------------------------
 
 // check and create dir for picture & thumbnail
-fs.mkdirSync(config.save.dir)
-fs.mkdirSync(path.join(config.save.dir,"thumb/"))
+exec("mkdir -p "+ path.join(config.save.dir,"thumb/"), (err, stdout, stderr) => {
+  if (err) { console.log(err) }
+  else { console.log('Directory created) }
+});
 
 
 var mime = {

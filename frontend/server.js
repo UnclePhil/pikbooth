@@ -152,34 +152,51 @@ function fire(cltid){
   var fullname = path.join(config.save.dir,pictname);
   var fullthumb = path.join(config.save.dir,"thumb/",pictname);
 
-  if (config.mode=="dev") {
-    tpl=path.join('./fake','fake.jpg')
-    fs.createReadStream(tpl).pipe(fs.createWriteStream(fullname));
-    console.log(`Fake picture in`+fullname);
-    io.emit('newpict', pictname);
-  }
-  else {
-    exec('gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"', (err, stdout, stderr) => {
-      if (err) {
-        console.error('Gphoto exec error: '+err);
-        io.to(cltid).emit('error', "Seems we have an error during the picture taking")
-      }
-      else {
-        
-        exec("convert -strip -thumbnail '"+config.booth.thwidth+"x>' "+fullname+" "+fullthumb, (err, stdout, stderr) => {
-          if (err) {
-            console.error('thumbnal exec error: '+err);
-            io.to(cltid).emit('error', "Seems we have an error during the picture transformation")
-          }
-          else {
-            console.log('OK Real picture '+pictname);
-            io.emit('newpict', pictname);
-          }
-        });
-        
-      }
-    });
-  }
+// todo change the logic to allow multiple driver depending of the config
+// fake: no Camera  (default)
+// dslr: gphoto2 driver
+// rasp: raspistill driver
+// webc: webcam driver
+//-----------------------------------------------------------
+
+switch (config.mode) {
+  case 'dslr':
+    cmd = 'gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"'
+    break;
+
+  case 'rasp':
+    cmd = 'gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"'
+    break;
+
+  case 'webc':
+    cmd = 'gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"'
+    break;
+  default:
+    cmd = 'cp '+path.join('./fake','fake.jpg')+' '+fullname
+}
+
+
+// process the command 
+  exec(cmd, (err, stdout, stderr) => {
+    if (err) {
+      console.error('Gphoto exec error: '+err);
+      io.to(cltid).emit('error', "Seems we have an error during the picture taking")
+    }
+    else {
+      
+      exec("convert -strip -thumbnail '"+config.booth.thwidth+"x>' "+fullname+" "+fullthumb, (err, stdout, stderr) => {
+        if (err) {
+          console.error('thumbnal exec error: '+err);
+          io.to(cltid).emit('error', "Seems we have an error during the picture transformation")
+        }
+        else {
+          console.log('OK Real picture '+pictname);
+          io.emit('newpict', pictname);
+        }
+      });
+      
+    }
+  });
 }
 
 

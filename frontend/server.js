@@ -158,6 +158,7 @@ function fire(cltid){
 // rasp: raspistill driver
 // webc: webcam driver
 //-----------------------------------------------------------
+var cmd
 
 switch (config.mode) {
   case 'dslr':

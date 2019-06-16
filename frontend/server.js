@@ -39,7 +39,8 @@ var config = {
     ext: "jpg"
   },
   booth:{
-    limit: 20
+    limit: 12,
+    thwidth: 150
   },
   client:{
     limit: 20
@@ -54,7 +55,7 @@ var config = {
 config.save.dir = process.env.PIKBOOTH_SAVE_DIR || "./pictures/" ;
 config.save.prefix = process.env.PIKBOOTH_SAVE_PREFIX || "pikbooth-" ;
 config.save.ext = process.env.PIKBOOTH_SAVE_EXT || "jpg" ;
-config.mode = process.env.PIKBOOTH_MODE || "dev" ;
+config.mode = process.env.PIKBOOTH_MODE || "fake" ;  // fake dslr, rasp, webc
 config.booth.limit = process.env.PIKBOOTH_BOOTH_LIMIT || 20 ;
 config.booth.thwidth = process.env.PIKBOOTH_BOOTH_THWIDTH || 150 ;  // thumbnal width for booth
 config.client.limit = process.env.PIKBOOTH_CLIENT_LIMIT || 20 ;

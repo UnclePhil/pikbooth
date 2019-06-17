@@ -173,6 +173,7 @@ switch (config.mode.toLowerCase()) {
   case 'webc':
     cmd = 'fswebcam '+fullname
     break;
+
   default:
     cmd = 'cp '+path.join('./fake','fake.jpg')+' '+fullname
 }

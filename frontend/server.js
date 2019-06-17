@@ -62,14 +62,7 @@ config.client.limit = process.env.PIKBOOTH_CLIENT_LIMIT || 20 ;
 config.cmd.limit = process.env.PIKBOOTH_CMD_LIMIT || 5 ;
 config.cmd.token = process.env.PIKBOOTH_CMD_TOKEN || 1961 ;
 
-//-------------------------------------------------
-
-// check and create dir for picture & thumbnail
-exec("mkdir -p "+ path.join(config.save.dir,"thumb/"), (err, stdout, stderr) => {
-  if (err) { console.log(err) }
-  else { console.log('Directory created') }
-});
-
+/// VARS ---
 
 var mime = {
   gif: 'image/gif',
@@ -79,14 +72,94 @@ var mime = {
 };
 
 var nw = os.networkInterfaces( );
-//console.log (nw);
+
+
+
+/// FUNCTIONS ---
+// check and create dir for picture & thumbnail
+function makedir() {
+  exec("mkdir -p "+ path.join(config.save.dir,"thumb/"), (err, stdout, stderr) => {
+    if (err) { console.log(err) }
+    else { console.log('Directory created') }
+  });
+}
+
+// clean picture & thumb directory
+function cleandir() {
+  exec("rm -rf "+ path.join(config.save.dir,".*."), (err, stdout, stderr) => {
+    if (err) { console.log("Cleaning error: ", err) }
+    else { console.log('Directory cleaned') }
+  });
+  makedir()
+}
+
+// take the picture
+function fire(cltid){
+  var exec = require('child_process').exec;
+  // picture definition
+  var now = new Date();
+  var dt = dateFormat(now,"yyyymmdd-HHMMss" );
+  var pictname= config.save.prefix+dt+"."+config.save.ext;
+  var fullname = path.join(config.save.dir,pictname);
+  var fullthumb = path.join(config.save.dir,"thumb/",pictname);
+
+// Select driver
+// fake: no Camera  (default)
+// dslr: gphoto2 driver
+// rasp: raspistill driver
+// webc: webcam driver
+//-----------------------------------------------------------
+var cmd
+
+switch (config.mode.toLowerCase()) {
+  case 'dslr':
+    cmd = 'gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"'
+    break;
+
+  case 'rasp':
+    cmd = 'raspistill -o '+fullname
+    break;
+
+  case 'webc':
+    cmd = 'fswebcam '+fullname
+    break;
+
+  default:
+    cmd = 'cp '+path.join('./fake','fake.jpg')+' '+fullname
+}
+// process the command 
+  exec(cmd, (err, stdout, stderr) => {
+    if (err) {
+      console.error('Gphoto exec error: '+err);
+      io.to(cltid).emit('error', "Seems we have an error during the picture taking")
+    }
+    else {
+      
+      exec("convert -strip -thumbnail '"+config.booth.thwidth+"x>' "+fullname+" "+fullthumb, (err, stdout, stderr) => {
+        if (err) {
+          console.error('thumbnal exec error: '+err);
+          io.to(cltid).emit('error', "Seems we have an error during the picture transformation")
+        }
+        else {
+          console.log('OK Real picture '+pictname);
+          io.emit('newpict', pictname);
+        }
+      });
+      
+    }
+  });
+}
+
+/// EOF FUNCTIONS
+
 // ROUTES
 ////////////////////////////////////////
 
-// root go to client page
+// default go to client page
 app.get('/', nocache ,function (req, res) {
   res.render('client', {type:"client",mode:config.mode})
 });
+
 app.get('/client',nocache, function (req, res) {
   res.render('client', {type:"client",mode:config.mode})
 });
@@ -96,10 +169,14 @@ app.get('/booth',nocache, function (req, res) {
   res.render('booth', {type:"booth",mode:config.mode, booth:1})
 });
 
-//cm go to command page
+//cmd go to command page
+// TODO : add security token
 app.get('/cmd', nocache, function (req, res) {
   res.render('cmd', {type:"cmd",mode:config.mode})
 });
+
+
+/// additional route
 
 // get one pictures
 app.get('/pict/:pict', function (req, res) {
@@ -143,68 +220,11 @@ app.get('/infos', nocache, function (req, res) {
 });
 
 
-// take the picture
-function fire(cltid){
-  var exec = require('child_process').exec;
-  // picture definition
-  var now = new Date();
-  var dt = dateFormat(now,"yyyymmdd-HHMMss" );
-  var pictname= config.save.prefix+dt+"."+config.save.ext;
-  var fullname = path.join(config.save.dir,pictname);
-  var fullthumb = path.join(config.save.dir,"thumb/",pictname);
+/// START ROUTINE
 
-// todo change the logic to allow multiple driver depending of the config
-// fake: no Camera  (default)
-// dslr: gphoto2 driver
-// rasp: raspistill driver
-// webc: webcam driver
-//-----------------------------------------------------------
-var cmd
-
-switch (config.mode.toLowerCase()) {
-  case 'dslr':
-    cmd = 'gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"'
-    break;
-
-  case 'rasp':
-    cmd = 'raspistill -o '+fullname
-    break;
-
-  case 'webc':
-    cmd = 'fswebcam '+fullname
-    break;
-
-  default:
-    cmd = 'cp '+path.join('./fake','fake.jpg')+' '+fullname
-}
-
-
-// process the command 
-  exec(cmd, (err, stdout, stderr) => {
-    if (err) {
-      console.error('Gphoto exec error: '+err);
-      io.to(cltid).emit('error', "Seems we have an error during the picture taking")
-    }
-    else {
-      
-      exec("convert -strip -thumbnail '"+config.booth.thwidth+"x>' "+fullname+" "+fullthumb, (err, stdout, stderr) => {
-        if (err) {
-          console.error('thumbnal exec error: '+err);
-          io.to(cltid).emit('error', "Seems we have an error during the picture transformation")
-        }
-        else {
-          console.log('OK Real picture '+pictname);
-          io.emit('newpict', pictname);
-        }
-      });
-      
-    }
-  });
-}
-
+makedir()
 
 //start a server on port 3000 and log its start to our console
-// WEBSOCKET 
 var server = app.listen(3000, function () {
 
   var port = server.address().port;
@@ -213,8 +233,9 @@ var server = app.listen(3000, function () {
 
 });
 
-var io = require('socket.io')(server);
 
+// WEBSOCKET server
+var io = require('socket.io')(server);
 
 io.on('connection', function(client) {
   console.log(client.id+': Connected');
@@ -234,6 +255,6 @@ io.on('connection', function(client) {
     io.emit('firebycmd');
   });
 
-
-
 });
+
+/// EOF Server

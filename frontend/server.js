@@ -161,17 +161,17 @@ function fire(cltid){
 //-----------------------------------------------------------
 var cmd
 
-switch (config.mode) {
+switch (config.mode.toLowerCase()) {
   case 'dslr':
     cmd = 'gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"'
     break;
 
   case 'rasp':
-    cmd = 'gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"'
+    cmd = 'raspistill -o '+fullname
     break;
 
   case 'webc':
-    cmd = 'gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"'
+    cmd = 'fswebcam '+fullname
     break;
   default:
     cmd = 'cp '+path.join('./fake','fake.jpg')+' '+fullname

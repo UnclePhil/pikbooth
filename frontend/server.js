@@ -117,7 +117,7 @@ switch (config.mode.toLowerCase()) {
     break;
 
   case 'rasp':
-    cmd = 'raspistill -o '+fullname
+    cmd = '/opt/vc/bin/raspistill -o '+fullname
     break;
 
   case 'webc':

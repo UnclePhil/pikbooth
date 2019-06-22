@@ -130,14 +130,14 @@ switch (config.mode.toLowerCase()) {
 // process the command 
   exec(cmd, (err, stdout, stderr) => {
     if (err) {
-      console.error('Gphoto exec error: '+err);
+      console.error(' photo exec error: '+err);
       io.to(cltid).emit('error', "Seems we have an error during the picture taking")
     }
     else {
       
       exec("convert -strip -thumbnail '"+config.booth.thwidth+"x>' "+fullname+" "+fullthumb, (err, stdout, stderr) => {
         if (err) {
-          console.error('thumbnal exec error: '+err);
+          console.error('thumbnail exec error: '+err);
           io.to(cltid).emit('error', "Seems we have an error during the picture transformation")
         }
         else {

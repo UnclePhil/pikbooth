@@ -14,8 +14,9 @@ socket.on('allpicts', function(picts){
     $( "main" ).empty();
     for (i = 0; i < picts.length; i++) {
         var url = "/thumb/"+picts[i];
-        var html = '<img src="'+url+'"></img>'
-        $('main').append(html);
+        var url2 = "/pict/"+pict;
+        var html = '<a href="'+url2+'"><img src="'+url+'"></img></a>'
+            $('main').append(html);
     }
     }
     else {
@@ -28,7 +29,8 @@ socket.on('newpict', function(pict){
     $( "#msg" ).hide();
     console.log("receive new picture "+pict)
     var url = "/thumb/"+pict;
-    var html = '<img src="'+url+'"></img>'
+    var url2 = "/pict/"+pict;
+    var html = '<a href="'+url2+'"><img src="'+url+'"></img></a>'
     $('main').prepend(html);
 });
 socket.on('error', function(msg){ 

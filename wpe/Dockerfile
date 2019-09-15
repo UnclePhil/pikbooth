@@ -30,4 +30,5 @@ RUN wget -O tohora.tgz \
 # -- End of resin-wifi-connect section -- #
 
 
-CMD  /wait-for-it.sh -t 60 frontend:3000 -- /wpe-init
+# CMD  /wait-for-it.sh -t 60 frontend:3000 -- /wpe-init
+CMD /wpe-init

@@ -45,6 +45,7 @@
       var html = '<img src="'+url+'"></img>'
       $('main').prepend(html);
     });
+    
     socket.on('error', function(msg){ 
         console.log (msg)
     });

@@ -10,14 +10,14 @@ socket.on('connect', function(data) {
 
 socket.on('allpicts', function(picts){ 
     if (picts.length > 0){
-    $( "#msg" ).hide();
-    $( "main" ).empty();
-    for (i = 0; i < picts.length; i++) {
-        var url = "/thumb/"+picts[i];
-        var url2 = "/pict/"+picts[i];
-        var html = '<a href="'+url2+'"><img src="'+url+'"></img></a>'
-            $('main').append(html);
-    }
+        $( "#msg" ).hide();
+        $( "main" ).empty();
+        for (i = 0; i < picts.length; i++) {
+            var url = "/thumb/"+picts[i];
+            var url2 = "/pict/"+picts[i];
+            var html = '<a href="'+url2+'"><img src="'+url+'"></img></a>'
+                $('main').append(html);
+        }
     }
     else {
         $( "#msg" ).show();

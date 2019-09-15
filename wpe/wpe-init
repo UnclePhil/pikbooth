@@ -35,7 +35,7 @@ if [[ ! -z ${GALLERY_URL} ]]
     WPE_URL="file:///var/lib/public_html/index.html"
 fi
 
-if [[ ! -z ${WPE_URL+x} ]]
+if [[ ! -z ${WPE_URL} ]]
   then
     sleep 5
     wget --post-data "url=$WPE_URL" http://proxy/booth/

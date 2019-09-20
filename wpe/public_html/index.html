@@ -18,12 +18,12 @@
     var reload = false;
     $(document).ready(function() {
         setInterval(() => {
-          fetch('http://photos:8888/')
+          fetch('http://proxy/booth')
           .then(status)
           .then(function(data) {
             console.log('fetch success');
             $('#loader').hide();
-            window.location = 'http://photos:8888/'
+            window.location = 'http://proxy/booth'
             if (reload) {
               reload = false
               window.location.reload(true)

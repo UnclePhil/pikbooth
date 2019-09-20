@@ -23,7 +23,7 @@ export XDG_RUNTIME_DIR=/tmp/balena/xdg_runtime
 export WPE_BCMRPI_TOUCH=1
 
 # Start Tohora
-./tohora 8080 cog
+./tohora 8080 cog &
 
 # wait for it
 sleep 1

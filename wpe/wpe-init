@@ -22,8 +22,6 @@ export XDG_RUNTIME_DIR=/tmp/balena/xdg_runtime
 # Enable touch screen
 export WPE_BCMRPI_TOUCH=1
 
-# Start Tohora
-./tohora 8080 cog &
 
 # wait for it
 sleep 1
@@ -31,14 +29,12 @@ sleep 1
 # Check if we have a GALLERY_URL set, otherwise load WPE_URL var
 if [[ ! -z ${WPE_URL} ]]
   then
-    echo "Loading gallery"
+    echo "Loading default page"
     WPE_URL="file:///var/lib/public_html/index.html"
 fi
 
-if [[ -z ${WPE_URL} ]]
-  then
-    sleep 5
-    wget --post-data "url=$WPE_URL"
-fi
+# start browser
+cog $WPE_URL &
 
-tail -f /dev/null
+# Start Tohora
+./tohora 8080 cog 

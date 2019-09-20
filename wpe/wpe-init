@@ -38,7 +38,9 @@ fi
 if [[ -z ${WPE_URL} ]]
   then
     sleep 5
-    wget --post-data "url=$WPE_URL" http://localhost:8080/launch/
+    ##wget --post-data "url=$WPE_URL" http://localhost:8080/launch/
+    wget --post-data "url=http://proxy/booth" http://localhost:8080/launch/
+    
 fi
 
 tail -f /dev/null

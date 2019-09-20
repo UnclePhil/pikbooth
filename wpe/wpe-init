@@ -32,15 +32,17 @@ sleep 1
 if [[ ! -z ${WPE_URL} ]]
   then
     echo "Loading default page"
-    WPE_URL="file:///var/lib/public_html/index.html"
+    sleep 5
+    wget --post-data "url=file:///var/lib/public_html/index.html" http://localhost:8080/launch/
+
 fi
 
 if [[ -z ${WPE_URL} ]]
   then
+    echo "Loading booth page"
     sleep 5
     wget --post-data "url=${WPE_URL}" http://localhost:8080/launch/
-    ##wget --post-data "url=http://proxy/booth" http://localhost:8080/launch/
-    
+   
 fi
 
 tail -f /dev/null

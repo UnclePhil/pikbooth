@@ -14,16 +14,13 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
-          <h4 class="text-white">About</h4>
-          <p class="text-muted">PiKBooth is a photobooth application running on a fleet of RaspberryPi and managed through Balena.io interface</p>
-        </div>
-        <div class="col-sm-4 offset-md-1 py-4">
-          <h4 class="text-white">Contact</h4>
-          <ul class="list-unstyled">
-            <li><a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" onclick="SleepTime(2000);>Picture</a></li> 
-            <li><a href="/infos" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Infos</a></li> 
-          </ul>
-        </div>
+          <p class="text-muted"><strong>PiKBooth</strong> is a photobooth application running on a fleet of RaspberryPi and managed through Balena.io interface</p>
+          <p class="text-muted">Pictures can be take through DSLR, piCam and usb webCam</p>
+          <p class="text-muted">Actual   IP is: {{#if ipaddr}} ({{ipaddr}}) {{/if}} </p>
+          <p class="text-muted">Actual SSID is: {{#if ssid}} ({{ssid}}) {{/if}} </p>
+          <p class="text-muted">Actual MODE is: {{#if mode}} ({{mode}}) {{/if}} </p>
+          <p class="text-muted">With <3 by Unclephil </p>
+       </div>
       </div>
     </div>
   </div>

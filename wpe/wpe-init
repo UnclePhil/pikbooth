@@ -31,15 +31,15 @@ sleep 1
 # Check if we have a GALLERY_URL set, otherwise load WPE_URL var
 if [[ ! -z ${WPE_URL} ]]
   then
-    echo "Loading gallery"
+    echo "Loading default page"
     WPE_URL="file:///var/lib/public_html/index.html"
 fi
 
 if [[ -z ${WPE_URL} ]]
   then
     sleep 5
-    ##wget --post-data "url=$WPE_URL" http://localhost:8080/launch/
-    wget --post-data "url=http://proxy/booth" http://localhost:8080/launch/
+    wget --post-data "url=${WPE_URL}" http://localhost:8080/launch/
+    ##wget --post-data "url=http://proxy/booth" http://localhost:8080/launch/
     
 fi
 

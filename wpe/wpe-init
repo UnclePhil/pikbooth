@@ -29,16 +29,16 @@ export WPE_BCMRPI_TOUCH=1
 sleep 1
 
 # Check if we have a GALLERY_URL set, otherwise load WPE_URL var
-if [[ ! -z ${GALLERY_URL} ]]
+if [[ ! -z ${WPE_URL} ]]
   then
     echo "Loading gallery"
     WPE_URL="file:///var/lib/public_html/index.html"
 fi
 
-if [[ ! -z ${WPE_URL} ]]
+if [[ -z ${WPE_URL} ]]
   then
     sleep 5
-    wget --post-data "url=$WPE_URL" http://proxy/booth/
+    wget --post-data "url=$WPE_URL"
 fi
 
 tail -f /dev/null

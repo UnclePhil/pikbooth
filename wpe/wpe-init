@@ -24,7 +24,7 @@ export WPE_BCMRPI_TOUCH=1
 
 
 # wait for it
-sleep 1
+# sleep 1
 
 # Check if we have a GALLERY_URL set, otherwise load WPE_URL var
 if [[ ! -z ${WPE_URL} ]]

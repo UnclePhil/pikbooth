@@ -41,3 +41,4 @@ if [[ -z ${WPE_URL} ]]
     wget --post-data "url=$WPE_URL" http://localhost:8080/launch/
 fi
 
+tail -f /dev/null

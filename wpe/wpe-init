@@ -22,6 +22,8 @@ export XDG_RUNTIME_DIR=/tmp/balena/xdg_runtime
 # Enable touch screen
 export WPE_BCMRPI_TOUCH=1
 
+# Start Tohora
+./tohora 8080 cog
 
 # wait for it
 sleep 1
@@ -36,8 +38,6 @@ fi
 if [[ -z ${WPE_URL} ]]
   then
     sleep 5
-    wget --post-data "url=$WPE_URL" http://localhost
+    wget --post-data "url=$WPE_URL" http://localhost:8080/launch/
 fi
 
-# Start Tohora
-./tohora 8080 cog

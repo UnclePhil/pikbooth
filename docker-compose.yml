@@ -8,7 +8,9 @@ services:
       - "3000"
     privileged: true
     volumes:
-      - "pictures:/pictures" 
+      - "pictures:/pictures"
+    labels:
+      io.balena.features.supervisor-api: '1'
   proxy:
     build: ./haproxy
     depends_on:

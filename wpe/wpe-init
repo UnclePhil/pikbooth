@@ -28,21 +28,16 @@ export WPE_BCMRPI_TOUCH=1
 # wait for it
 sleep 1
 
-# Check if we have a GALLERY_URL set, otherwise load WPE_URL var
-if [[ ! -z ${WPE_URL} ]]
+# Check if we have a  WPE_URL var
+if [[ -z ${WPE_URL} ]]
   then
     echo "Loading default page"
     sleep 5
     wget --post-data "url=file:///var/lib/public_html/index.html" http://localhost:8080/launch/
-
-fi
-
-if [[ -z ${WPE_URL} ]]
-  then
+  else
     echo "Loading booth page"
     sleep 5
     wget --post-data "url=${WPE_URL}" http://localhost:8080/launch/
-   
 fi
 
 tail -f /dev/null

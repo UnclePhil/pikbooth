@@ -21,7 +21,7 @@
           fetch('http://proxy/booth')
           .then(status)
           .then(function(data) {
-            console.log('fetch success');
+            console.log('WPE fetch success');
             $('#loader').hide();
             window.location = 'http://proxy/booth'
             if (reload) {
@@ -30,7 +30,7 @@
             }
 
           }).catch(function(error) {
-            console.log('Request failed', error);
+            console.log('WPE Request failed', error);
             reload = true
           });
         }, 1000);
@@ -39,13 +39,7 @@
 </head>
 <body>
   <h2>PiKBooth</h2>
-    <p>Welcome the the PiKBooth system</p>
-    <p>My Ip address is :X.Y.Z.ZZ</p>
-    <p>You can connect to the PiKBooth SSID with PiKBooth password and then configure my connection to the local WIFI</p>
-    <p>After that you will be able to view and control the device with the above ip address</p>
-    
-
-
+    <p>Welcome the the PiKBooth system, It seems that we have an internal connectivity problem</p>
   <div id="loader">
     <img src="balena_icon.svg" width="70" height="70">
   </div>

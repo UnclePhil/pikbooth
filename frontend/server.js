@@ -39,14 +39,14 @@ var config = {
     ext: "jpg"
   },
   booth:{
-    limit: 12,
+    limit: 16,
     thwidth: 150
   },
   client:{
-    limit: 20
+    limit: 1000
   },
   cmd:{
-    limit: 5,
+    limit: 50,
     token: "1961"
   }, 
   mode:"dev"   
@@ -56,10 +56,10 @@ config.save.dir = process.env.PIKBOOTH_SAVE_DIR || "./pictures/" ;
 config.save.prefix = process.env.PIKBOOTH_SAVE_PREFIX || "pikbooth-" ;
 config.save.ext = process.env.PIKBOOTH_SAVE_EXT || "jpg" ;
 config.mode = process.env.PIKBOOTH_MODE || "fake" ;  // fake dslr, rasp, webc
-config.booth.limit = process.env.PIKBOOTH_BOOTH_LIMIT || 20 ;
+config.booth.limit = process.env.PIKBOOTH_BOOTH_LIMIT || 16 ;
 config.booth.thwidth = process.env.PIKBOOTH_BOOTH_THWIDTH || 150 ;  // thumbnal width for booth
-config.client.limit = process.env.PIKBOOTH_CLIENT_LIMIT || 20 ;
-config.cmd.limit = process.env.PIKBOOTH_CMD_LIMIT || 5 ;
+config.client.limit = process.env.PIKBOOTH_CLIENT_LIMIT || 1000 ;
+config.cmd.limit = process.env.PIKBOOTH_CMD_LIMIT || 50 ;
 config.cmd.token = process.env.PIKBOOTH_CMD_TOKEN || 1961 ;
 
 /// VARS ---
@@ -157,22 +157,22 @@ switch (config.mode.toLowerCase()) {
 
 // default go to client page
 app.get('/', nocache ,function (req, res) {
-  res.render('client', {type:"client",mode:config.mode})
+  res.render('client', {type:"client",cfg:config})
 });
 
 app.get('/client',nocache, function (req, res) {
-  res.render('client', {type:"client",mode:config.mode})
+  res.render('client', {type:"client",cfg:config})
 });
 
 // booth go to booth page 
 app.get('/booth',nocache, function (req, res) {
-  res.render('booth', {type:"booth",mode:config.mode, booth:1})
+  res.render('booth', {type:"booth",cfg:config, booth:1})
 });
 
 //cmd go to command page
 // TODO : add security token
 app.get('/cmd', nocache, function (req, res) {
-  res.render('cmd', {type:"cmd",mode:config.mode})
+  res.render('cmd', {type:"cmd",cfg:config})
 });
 
 
@@ -241,7 +241,20 @@ io.on('connection', function(client) {
   console.log(client.id+': Connected');
   
   client.on('join', function(data) {
-    var pictures = fs.readdirSync(path.join(config.save.dir,"thumb")).reverse().slice(0,config.booth.limit);
+    var lim=15 ;
+    switch (data) {
+      case 'booth':
+        lim=config.booth.limit;
+        break;
+      case 'client':
+        lim=config.client.limit;
+        break;
+      case 'cmd':
+        lim=config.cmd.limit;
+        break;
+      }
+
+    var pictures = fs.readdirSync(path.join(config.save.dir,"thumb")).reverse().slice(0,lim);
     io.to(client.id).emit('allpicts', pictures);
     console.log(client.id+": ("+data+") push pictures");
   });

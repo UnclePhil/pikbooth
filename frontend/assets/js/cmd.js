@@ -5,7 +5,7 @@
 var socket = io.connect(window.location.origin);
 
 socket.on('connect', function(data) {
-    socket.emit('join', 'Cmd');
+    socket.emit('join', 'cmd');
 });
 
 socket.on('allpicts', function(picts){ 

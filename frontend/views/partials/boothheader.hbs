@@ -13,12 +13,16 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
-          <p class="text-muted"><strong>PiKBooth</strong> is a photobooth application running on a fleet of RaspberryPi and managed through Balena.io interface</p>
-          <p class="text-muted">Pictures can be take through DSLR, piCam and usb webCam</p>
-          <p class="text-muted">Actual   IP is: {{#if ipaddr}} ({{ipaddr}}) {{/if}} </p>
-          <p class="text-muted">Actual SSID is: {{#if ssid}} ({{ssid}}) {{/if}} </p>
-          <p class="text-muted">Actual MODE is: {{#if cfg.mode}} ({{cfg.mode}}) {{/if}} </p>
-          <p class="text-muted">With <3 by Unclephil </p>
+          <p ><img src="/img/pikbooth.png"> is a photobooth application running on a fleet of RaspberryPi and managed through Balena.io interface</p>
+          <p >Pictures can be take through DSLR, piCam and usb webCam</p>
+          <p >Made with <3 by Unclephil </p>
+          <p > Configuration:
+            <ul>
+              <li>Actual MODE is: {{#if cfg.mode}} ({{cfg.mode}}) {{/if}} </li>
+              <li>Actual SSID is: {{#if ssid}} ({{ssid}}) {{/if}} </li>
+              <li>Actual   IP is: {{#if ipaddr}} ({{ipaddr}}) {{/if}} </li>   
+          </ul>
+          </p>
        </div>
       </div>
     </div>

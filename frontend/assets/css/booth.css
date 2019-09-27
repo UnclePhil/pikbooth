@@ -48,6 +48,10 @@ main {
   vertical-align: middle
 }
 #navbarHeader {
-  padding-top: 50px;
+  padding-top: 65px;
   color: white;
+}
+
+.piklogo {
+  height: 30px;
 }

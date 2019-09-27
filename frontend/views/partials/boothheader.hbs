@@ -12,15 +12,18 @@
   <div class="collapse navbar-collapse bg-dark" id="navbarHeader">
     <div class="container">
       <div class="row">
-        <div class="col-sm-8 col-md-7 py-4">
-          <p ><img src="/img/pikbooth.png"> is a photobooth application running on a fleet of RaspberryPi and managed through Balena.io interface</p>
-          <p >Pictures can be take through DSLR, piCam and usb webCam</p>
-          <p >Made with <3 by Unclephil </p>
+        <div class="col-sm-6">
+          <p ><img src="/img/pikbooth.png"> 
+          <p>A photobooth controller running on RaspberryPi</p>
+          <p>Pictures can be take through DSLR, piCam and usb webCam</p>
+          <p>Made with by Unclephil</p>
+        </div>
+        <div class="col-sm-6">
           <p > Configuration:
             <ul>
-              <li>Actual MODE is: {{#if cfg.mode}} ({{cfg.mode}}) {{/if}} </li>
-              <li>Actual SSID is: {{#if ssid}} ({{ssid}}) {{/if}} </li>
-              <li>Actual   IP is: {{#if ipaddr}} ({{ipaddr}}) {{/if}} </li>   
+              <li>MODE : {{#if cfg.mode}} ({{cfg.mode}}) {{/if}} </li>
+              <li>SSID : {{#if ssid}} ({{ssid}}) {{/if}} </li>
+              <li>  IP : {{#if ipaddr}} ({{ipaddr}}) {{/if}} </li>   
           </ul>
           </p>
        </div>

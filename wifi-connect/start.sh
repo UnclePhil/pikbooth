@@ -21,10 +21,10 @@ while [[ true ]]; do
   if [ $? -eq 0 ]; then
       printf 'Skipping WiFi Connect\n'
   else
-      printf 'Starting WiFi Access Point\n'
+      printf 'Starting WiFi Local Access Point\n'
       # Start wifi-connect with SSID and make it exit if no interaction happens within 10 minutes.
       ./wifi-connect -a 600 -s PiKBooth-${BALENA_DEVICE_NAME_AT_INIT} -p PiKBooth-${BALENA_DEVICE_NAME_AT_INIT} -o 8081
   fi
   # wait 2 minute before checking again for internet connectivity
-  sleep 120
+  sleep 60
 done

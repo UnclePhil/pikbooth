@@ -76,6 +76,16 @@ var nw = os.networkInterfaces( );
 
 
 /// FUNCTIONS ---
+//get host ip
+function gethostip(){
+  cmd='curl "$BALENA_SUPERVISOR_ADDRESS/v1/device/host-config?apikey=$BALENA_SUPERVISOR_API_KEY"'
+
+  exec(cmd), (err, stdout, stderr) => {
+    if (err) { console.log(err) }
+    else { console.log(stdout) }
+  });
+}
+
 // check and create dir for picture & thumbnail
 function makedir() {
   exec("mkdir -p "+ path.join(config.save.dir,"thumb/"), (err, stdout, stderr) => {
@@ -141,6 +151,7 @@ switch (config.mode.toLowerCase()) {
           io.to(cltid).emit('error', "Seems we have an error during the picture transformation")
         }
         else {
+          ip = gethostip()
           console.log('OK Real picture '+pictname);
           io.emit('newpict', pictname);
         }

@@ -82,7 +82,11 @@ function gethostip() {
 
   exec(cmd, (err, stdout, stderr) => {
     if (err) { console.log(err) }
-    else { console.log(stdout) }
+    else { 
+      ip=JSON.parse(stdout).ip_address
+      console.log(ip)
+      
+     }
   });
 }
 

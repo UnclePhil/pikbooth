@@ -78,7 +78,7 @@ var nw = os.networkInterfaces( );
 /// FUNCTIONS ---
 //get host ip
 function gethostip() {
-  cmd='curl "$BALENA_SUPERVISOR_ADDRESS/v1/device/host-config?apikey=$BALENA_SUPERVISOR_API_KEY"'
+  cmd= 'curl -X GET --header "Content-Type:application/json" "$BALENA_SUPERVISOR_ADDRESS/v1/device?apikey=$BALENA_SUPERVISOR_API_KEY"'
 
   exec(cmd, (err, stdout, stderr) => {
     if (err) { console.log(err) }

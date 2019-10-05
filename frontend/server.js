@@ -77,10 +77,10 @@ var nw = os.networkInterfaces( );
 
 /// FUNCTIONS ---
 //get host ip
-function gethostip(){
+function gethostip() {
   cmd='curl "$BALENA_SUPERVISOR_ADDRESS/v1/device/host-config?apikey=$BALENA_SUPERVISOR_API_KEY"'
 
-  exec(cmd), (err, stdout, stderr) => {
+  exec(cmd, (err, stdout, stderr) => {
     if (err) { console.log(err) }
     else { console.log(stdout) }
   });

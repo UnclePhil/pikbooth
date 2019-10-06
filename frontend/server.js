@@ -264,6 +264,7 @@ io.on('connection', function(client) {
     switch (data) {
       case 'booth':
         lim=config.booth.limit;
+        gethostip();
         break;
       case 'client':
         lim=config.client.limit;
@@ -276,6 +277,7 @@ io.on('connection', function(client) {
     var pictures = fs.readdirSync(path.join(config.save.dir,"thumb")).reverse().slice(0,lim);
     io.to(client.id).emit('allpicts', pictures);
     console.log(client.id+": ("+data+") push pictures");
+    
   });
 
   client.on('fire', function(data) {

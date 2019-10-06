@@ -81,11 +81,12 @@ function gethostip() {
   cmd= 'curl -X GET --header "Content-Type:application/json" "$BALENA_SUPERVISOR_ADDRESS/v1/device?apikey=$BALENA_SUPERVISOR_API_KEY"'
 
   exec(cmd, (err, stdout, stderr) => {
-    if (err) { console.log(err) }
+    if (err) { console.log(err)
+      return null 
+    }
     else { 
       ip=JSON.parse(stdout).ip_address
-      console.log(ip)
-      
+      return ip
      }
   });
 }
@@ -157,7 +158,7 @@ switch (config.mode.toLowerCase()) {
         else {
           ip = gethostip()
           console.log('OK Real picture '+pictname);
-          io.emit('newpict', pictname);
+          io.emit('newpict', {"pict":pictname,"ip":ip});
         }
       });
       

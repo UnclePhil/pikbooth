@@ -38,12 +38,13 @@
       }
     });
 
-    socket.on('newpict', function(pict){ 
+    socket.on('newpict', function(dt){ 
       $( "#pop" ).hide();
       $( "#msg" ).hide();
-      var url = "/thumb/"+pict;
+      var url = "/thumb/"+dt.pict;
       var html = '<img src="'+url+'"></img>'
       $('main').prepend(html);
+      $('#ip').html(dt.ip);
     });
     
     socket.on('error', function(msg){ 

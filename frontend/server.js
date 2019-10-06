@@ -157,10 +157,8 @@ switch (config.mode.toLowerCase()) {
           io.to(cltid).emit('error', "Seems we have an error during the picture transformation")
         }
         else {
-          let ip = gethostip();
-          console.log('OK ip is '+ip);
           console.log('OK Real picture '+pictname);
-          io.emit('newpict', {"pict":pictname,"ip":ip});
+          io.emit('newpict', {"pict":pictname,"ip":gethostip()});
         }
       });
       

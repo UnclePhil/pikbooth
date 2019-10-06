@@ -86,8 +86,7 @@ function gethostip() {
     }
     else { 
       let ip=JSON.parse(stdout).ip_address;
-      console.log(ip)
-      return ip;
+      io.emit('boothip', ip);
      }
   });
 }
@@ -158,7 +157,7 @@ switch (config.mode.toLowerCase()) {
         }
         else {
           console.log('OK Real picture '+pictname);
-          io.emit('newpict', {"pict":pictname,"ip":await gethostip()});
+          io.emit('newpict', {"pict":pictname});
         }
       });
       

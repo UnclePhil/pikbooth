@@ -47,6 +47,10 @@
       $('#ip').html(dt.ip);
     });
     
+    socket.on('boothip', function(dt){ 
+      $('#ip').html(dt);
+    });
+    
     socket.on('error', function(msg){ 
         console.log (msg)
     });

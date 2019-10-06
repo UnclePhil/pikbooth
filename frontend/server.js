@@ -85,7 +85,7 @@ function gethostip() {
       return null; 
     }
     else { 
-      ip=JSON.parse(stdout).ip_address;
+      let ip=JSON.parse(stdout).ip_address;
       console.log(ip)
       return ip;
      }
@@ -157,7 +157,7 @@ switch (config.mode.toLowerCase()) {
           io.to(cltid).emit('error', "Seems we have an error during the picture transformation")
         }
         else {
-          ip = gethostip();
+          let ip = gethostip();
           console.log('OK ip is '+ip);
           console.log('OK Real picture '+pictname);
           io.emit('newpict', {"pict":pictname,"ip":ip});

@@ -158,7 +158,7 @@ switch (config.mode.toLowerCase()) {
         }
         else {
           console.log('OK Real picture '+pictname);
-          io.emit('newpict', {"pict":pictname,"ip":gethostip()});
+          io.emit('newpict', {"pict":pictname,"ip":await gethostip()});
         }
       });
       

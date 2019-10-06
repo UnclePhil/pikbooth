@@ -24,13 +24,13 @@ socket.on('allpicts', function(picts){
     }
 });
 
-socket.on('newpict', function(pict){ 
+socket.on('newpict', function(dt){ 
     $( "#pop" ).hide();
     $( "#msg" ).hide();
-    console.log("receive new picture "+pict)
-    var url = "/thumb/"+pict;
-    var url2 = "/pict/"+pict;
-    var html = '<a href="'+url2+'" download="'+pict+'"><img src="'+url+'"></img></a>'
+    console.log("receive new picture "+dt.pict)
+    var url = "/thumb/"+dt.pict;
+    var url2 = "/pict/"+dt.pict;
+    var html = '<a href="'+url2+'" download="'+dt.pict+'"><img src="'+url+'"></img></a>'
 $('main').prepend(html);
 });
 socket.on('error', function(msg){ 

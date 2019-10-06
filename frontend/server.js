@@ -82,11 +82,12 @@ function gethostip() {
 
   exec(cmd, (err, stdout, stderr) => {
     if (err) { console.log(err)
-      return null 
+      return null; 
     }
     else { 
-      ip=JSON.parse(stdout).ip_address
-      return ip
+      ip=JSON.parse(stdout).ip_address;
+      console.log(ip)
+      return ip;
      }
   });
 }
@@ -156,7 +157,8 @@ switch (config.mode.toLowerCase()) {
           io.to(cltid).emit('error', "Seems we have an error during the picture transformation")
         }
         else {
-          ip = gethostip()
+          ip = gethostip();
+          console.log('OK ip is '+ip);
           console.log('OK Real picture '+pictname);
           io.emit('newpict', {"pict":pictname,"ip":ip});
         }

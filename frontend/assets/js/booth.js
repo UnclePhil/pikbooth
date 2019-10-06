@@ -44,7 +44,6 @@
       var url = "/thumb/"+dt.pict;
       var html = '<img src="'+url+'"></img>'
       $('main').prepend(html);
-      $('#ip').html(dt.ip);
     });
     
     socket.on('boothip', function(dt){ 

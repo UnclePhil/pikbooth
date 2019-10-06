@@ -86,6 +86,7 @@ function gethostip() {
     }
     else { 
       let ip=JSON.parse(stdout).ip_address;
+      console.log("Send booth ip");
       io.emit('boothip', ip);
      }
   });
@@ -117,6 +118,9 @@ function fire(cltid){
   var pictname= config.save.prefix+dt+"."+config.save.ext;
   var fullname = path.join(config.save.dir,pictname);
   var fullthumb = path.join(config.save.dir,"thumb/",pictname);
+
+  // send ip to booth
+  gethostip()
 
 // Select driver
 // fake: no Camera  (default)

@@ -45,3 +45,7 @@ function fire() {
 function cmdfire() {
     socket.emit('cmdfire', 'Cmd fire booth picture');
 }
+
+function settings() {
+    
+}

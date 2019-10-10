@@ -197,7 +197,7 @@ app.get('/cmd', nocache, function (req, res) {
 //cmd go to command page
 // TODO : add security token
 app.get('/cmd/set', nocache, function (req, res) {
-  res.render('cmdset', {type:"cmd",cfg:config})
+  res.render('cmdset', {type:"cmdset",cfg:config})
 });
 
 

@@ -46,6 +46,8 @@ function cmdfire() {
     socket.emit('cmdfire', 'Cmd fire booth picture');
 }
 
-function settings() {
+/// specials for settings
+
+function cmdsetsave() {
     
 }

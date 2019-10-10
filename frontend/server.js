@@ -194,6 +194,12 @@ app.get('/cmd', nocache, function (req, res) {
   res.render('cmd', {type:"cmd",cfg:config})
 });
 
+//cmd go to command page
+// TODO : add security token
+app.get('/cmd/set', nocache, function (req, res) {
+  res.render('cmdset', {type:"cmd",cfg:config})
+});
+
 
 /// additional route
 

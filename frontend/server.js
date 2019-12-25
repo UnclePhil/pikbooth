@@ -79,19 +79,38 @@ var nw = os.networkInterfaces( );
 //get host information
 // ip, picture count
 
-function gethostinfo() {
+
+function gethostip() {
   cmd= 'curl -X GET --header "Content-Type:application/json" "$BALENA_SUPERVISOR_ADDRESS/v1/device?apikey=$BALENA_SUPERVISOR_API_KEY"'
-  let pcount = fs.readdirSync(config.save.dir).lenght;
   exec(cmd, (err, stdout, stderr) => {
     if (err) { console.log(err)
       return null; 
     }
     else { 
       let ip=JSON.parse(stdout).ip_address;
-      console.log("Send booth infos: ", pcount );
-      io.emit('boothinfo', {"ip":ip, "count":pcount});
+      console.log("Send booth ip: ");
+      io.emit('boothip', ip);
      }
   });
+}
+
+function getpictcount() {
+  cmd= 'ls -l /pictures/*.jpg |wc-l'
+  exec(cmd, (err, stdout, stderr) => {
+    if (err) { console.log(err)
+      return null; 
+    }
+    else { 
+      let dt=stdout;
+      console.log("Send booth pict count");
+      io.emit('boothpictcount', dt);
+     }
+  });
+}
+
+function gethostinfo() {
+  gethostip();
+  getpictcount();
 }
 
 // check and create dir for picture & thumbnail
@@ -121,7 +140,7 @@ function fire(cltid){
   var fullname = path.join(config.save.dir,pictname);
   var fullthumb = path.join(config.save.dir,"thumb/",pictname);
 
-  // send ip to booth
+  // send info to booth screen
   gethostinfo()
 
 // Select driver

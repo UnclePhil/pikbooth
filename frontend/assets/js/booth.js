@@ -46,10 +46,13 @@
       $('main').prepend(html);
     });
     
-    socket.on('boothinfo', function(dt){ 
-      $('#ip').html(dt.ip);
-      $('#count').html(dt.count);
+    socket.on('boothip', function(dt){ 
+      $('#ip').html(dt);
     });
+    socket.on('boothpictcount', function(dt){ 
+      $('#count').html(dt);
+    });
+    
     
     socket.on('error', function(msg){ 
         console.log (msg)

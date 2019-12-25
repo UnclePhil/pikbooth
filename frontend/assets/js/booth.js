@@ -50,7 +50,7 @@
       $('#ip').html(dt);
     });
     socket.on('boothpictcount', function(dt){ 
-      $('#count').html(dt);
+      $('#pcount').html(dt);
     });
     
     

@@ -88,7 +88,7 @@ function gethostip() {
     }
     else { 
       let ip=JSON.parse(stdout).ip_address;
-      console.log("Send booth ip: ");
+      console.log("Send booth ip:",ip);
       io.emit('boothip', ip);
      }
   });
@@ -102,7 +102,7 @@ function getpictcount() {
     }
     else { 
       let dt=stdout;
-      console.log("Send booth pict count");
+      console.log("Send booth pict count",dt);
       io.emit('boothpictcount', dt);
      }
   });

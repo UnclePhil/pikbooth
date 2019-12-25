@@ -76,19 +76,20 @@ var nw = os.networkInterfaces( );
 
 
 /// FUNCTIONS ---
-//get host ip
+//get host information
+// ip, picture count
+
 function gethostinfo() {
   cmd= 'curl -X GET --header "Content-Type:application/json" "$BALENA_SUPERVISOR_ADDRESS/v1/device?apikey=$BALENA_SUPERVISOR_API_KEY"'
-
+  pcount = fs.readdirSync(config.save.dir).lenght;
   exec(cmd, (err, stdout, stderr) => {
     if (err) { console.log(err)
       return null; 
     }
     else { 
       let ip=JSON.parse(stdout).ip_address;
-      let count = fs.readdirSync(config.save.dir).lenght
-      console.log("Send booth info");
-      io.emit('boothinfo', {ip:ip, count:count});
+      console.log("Send booth infos: ", pcount );
+      io.emit('boothinfo', {"ip":ip, "count":pcount});
      }
   });
 }

@@ -271,7 +271,7 @@ io.on('connection', function(client) {
     switch (data) {
       case 'booth':
         lim=config.booth.limit;
-        gethostip();
+        gethostinfo();
         break;
       case 'client':
         lim=config.client.limit;

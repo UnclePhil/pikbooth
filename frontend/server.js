@@ -95,17 +95,9 @@ function gethostip() {
 }
 
 function getpictcount() {
-  cmd= 'ls -l /pictures/*.jpg |wc -l'
-  exec(cmd, (err, stdout, stderr) => {
-    if (err) { console.log(err)
-      return null; 
-    }
-    else { 
-      let dt=stdout;
-      console.log("Send booth pict count",dt);
-      io.emit('boothpictcount', dt);
-     }
-  });
+  var dt = fs.readdirSync(path.join(config.save.dir,"thumb")).length;
+  console.log("Send booth pict count:",dt);
+  io.emit('boothpictcount', dt);
 }
 
 function gethostinfo() {

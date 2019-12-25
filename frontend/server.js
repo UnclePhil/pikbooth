@@ -77,7 +77,7 @@ var nw = os.networkInterfaces( );
 
 /// FUNCTIONS ---
 //get host ip
-function gethostip() {
+function gethostinfo() {
   cmd= 'curl -X GET --header "Content-Type:application/json" "$BALENA_SUPERVISOR_ADDRESS/v1/device?apikey=$BALENA_SUPERVISOR_API_KEY"'
 
   exec(cmd, (err, stdout, stderr) => {
@@ -86,8 +86,9 @@ function gethostip() {
     }
     else { 
       let ip=JSON.parse(stdout).ip_address;
-      console.log("Send booth ip");
-      io.emit('boothip', ip);
+      let count = fs.readdirSync(config.save.dir).lenght
+      console.log("Send booth info");
+      io.emit('boothinfo', {ip:ip, count:count});
      }
   });
 }
@@ -120,7 +121,7 @@ function fire(cltid){
   var fullthumb = path.join(config.save.dir,"thumb/",pictname);
 
   // send ip to booth
-  gethostip()
+  gethostinfo()
 
 // Select driver
 // fake: no Camera  (default)

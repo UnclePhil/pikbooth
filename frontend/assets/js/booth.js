@@ -46,8 +46,9 @@
       $('main').prepend(html);
     });
     
-    socket.on('boothip', function(dt){ 
-      $('#ip').html(dt);
+    socket.on('boothinfo', function(dt){ 
+      $('#ip').html(dt.ip);
+      $('#count').html(dt.count);
     });
     
     socket.on('error', function(msg){ 

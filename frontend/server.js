@@ -95,7 +95,7 @@ function gethostip() {
 }
 
 function getpictcount() {
-  cmd= 'ls -l /pictures/*.jpg |wc-l'
+  cmd= 'ls -l /pictures/*.jpg |wc -l'
   exec(cmd, (err, stdout, stderr) => {
     if (err) { console.log(err)
       return null; 

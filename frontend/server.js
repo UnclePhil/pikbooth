@@ -132,9 +132,7 @@ function fire(cltid){
   var fullname = path.join(config.save.dir,pictname);
   var fullthumb = path.join(config.save.dir,"thumb/",pictname);
 
-  // send info to booth screen
-  gethostinfo()
-
+ 
 // Select driver
 // fake: no Camera  (default)
 // dslr: gphoto2 driver
@@ -175,6 +173,8 @@ switch (config.mode.toLowerCase()) {
         else {
           console.log('OK Real picture '+pictname);
           io.emit('newpict', {"pict":pictname});
+          gethostinfo()
+
         }
       });
       

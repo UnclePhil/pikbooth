@@ -81,7 +81,7 @@ var nw = os.networkInterfaces( );
 
 function gethostinfo() {
   cmd= 'curl -X GET --header "Content-Type:application/json" "$BALENA_SUPERVISOR_ADDRESS/v1/device?apikey=$BALENA_SUPERVISOR_API_KEY"'
-  pcount = fs.readdirSync(config.save.dir).lenght;
+  let pcount = fs.readdirSync(config.save.dir).lenght;
   exec(cmd, (err, stdout, stderr) => {
     if (err) { console.log(err)
       return null; 

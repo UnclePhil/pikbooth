@@ -26,7 +26,7 @@ export WPE_BCMRPI_TOUCH=1
 ./tohora 8080 cog &
 
 # wait for it
-sleep 10
+sleep 15
 
 # Check if we have a  WPE_URL var
 if [[ -z ${WPE_URL} ]]

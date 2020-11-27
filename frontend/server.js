@@ -155,7 +155,9 @@ switch (config.mode.toLowerCase()) {
     break;
 
   default:
-    cmd = 'cp '+path.join('./fake','fake.jpg')+' '+fullname
+    nbr=Math.floor(Math.random() * 6) + 1
+    fpct="fake"+nbr+".jpg"
+    cmd = 'cp '+path.join('./fake',fpct)+' '+fullname
 }
 // process the command 
   exec(cmd, (err, stdout, stderr) => {

@@ -25,9 +25,9 @@ services:
     labels:
       io.balena.features.dbus: '1'
       io.balena.features.firmware: '1'
-  wpe:
+  kiosk:
     restart: always
-    build: ./wpe
+    build: ./kiosk
     privileged: true
     ports:
       - 8080:8080

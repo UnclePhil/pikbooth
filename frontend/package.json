@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "An Expressjs server to pilot gphoto2, raspistill fswebcam",
   "engines" : { 
-    "node" : ">=8.0.0 <11.0.0" 
+    "node" : "*" 
   },
   "main": "server.js",
   "scripts": {
@@ -17,9 +17,10 @@
   "keywords": [
     "webserver",
     "nodejs",
-    "expressjs"
+    "expressjs",
+    "Photobooth"
   ],
-  "author": "ph Koenig <koenigphil@gmail.com>",
+  "author": "Ph Koenig <koenigphil@gmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
     "dateformat": "*",

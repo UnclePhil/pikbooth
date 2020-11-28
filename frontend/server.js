@@ -155,7 +155,7 @@ switch (config.mode.toLowerCase()) {
     break;
 
   default:
-    nbr=Math.floor(Math.random() * 6) + 1
+    nbr=Math.floor(Math.random() * 5) + 1
     fpct="fake"+nbr+".jpg"
     cmd = 'cp '+path.join('./fake',fpct)+' '+fullname
 }

@@ -1,19 +1,24 @@
 {{>cmdsetheader}}
 <main class="set">
-<pre>
-Mode : {{cfg.mode}}
-</pre>
 <form>
-    <div class="form-group">
-    <label for="setmode">Mode</label>
+<div class="row">
+  <div class="col-25"> Actual State</div>
+  <div class="col-75">{{cfg.mode}}</div> 
+</div>
+<div class="row">
+  <div class="col-25">Set to </div>
+  <div class="col-75">
     <select class="form-control" id="setmode">
-      <option>fake</option>
-      <option>dslr</option>
-      <option>rasp</option>
-      <option>webc</option>
+      <option value='fake'>fake: present a dummy picture</option>
+      <option value='dslr'>dslr: Use a real camera </option>
+      <option value='rasp'>rasp: Use a Raspberrypi Cam</option>
+      <option value='webc'>webc: Use a webcam</option>
     </select>
   </div>
+</div>
 </form>
 </main>
+
+
 
 {{>cmdsetfooter}}

@@ -15,6 +15,7 @@
     bottom: 56px;
     right: 0;
     left: 40px;
+    width: 95%;
     overflow-y: auto;
   }
   footer {

@@ -142,19 +142,25 @@ function fire(cltid){
 var cmd
 
 switch (config.mode.toLowerCase()) {
+  // dslr am with gphoto2
   case 'dslr':
     cmd = 'gphoto2 --capture-image-and-download --keep --filename "'+fullname+'"'
     break;
 
+  // raspberrypicam with raspistill  
   case 'rasp':
     cmd = '/opt/vc/bin/raspistill -n -md 1 -t 1 -o '+fullname
     break;
 
+  // webcam with ffmpeg
   case 'webc':
-    cmd = 'fswebcam '+fullname
+    cmd = 'ffmpeg -f video4linux2 -i /dev/v4l/by-id/usb-0c45_USB_camera-video-index0 -vframes 1 '+fullname
+    // cmd = 'fswebcam '+fullname
     break;
 
+  // fake pictures
   default:
+
     nbr=Math.floor(Math.random() * 5) + 1
     fpct="fake"+nbr+".jpg"
     cmd = 'cp '+path.join('./fake',fpct)+' '+fullname

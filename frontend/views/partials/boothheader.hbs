@@ -9,6 +9,28 @@
       </button>
     </div>
   </div>
-  {{>boothinfos}}
+  <div class="collapse navbar-collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <p ><img src="/img/pikbooth.png"> 
+          <p>A photobooth controller running on RaspberryPi</p>
+          <p>Pictures can be take through DSLR, piCam and usb webCam</p>
+          <p>Made by Unclephil</p>
+        </div>
+        <div class="col-sm-6">
+          <p > Configuration:
+            <ul>
+              <li>MODE  : {{#if cfg.mode}} ({{cfg.mode}}) {{/if}} </li>
+              <li>SSID  : {{#if ssid}} ({{ssid}}) {{/if}} </li>
+              <li>  IP  : <span id="ip">Unknow</span> </li> 
+              <li>BUILD : <span id="build">Unknow</span> </li>   
+              <li>PICT  : <span id="pcount">Unknow</span> </li>   
+          </ul>
+          </p>
+       </div>
+      </div>
+    </div>
+  </div>
 
 </header>

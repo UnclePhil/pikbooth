@@ -56,11 +56,11 @@ config.save.dir = process.env.PIKBOOTH_SAVE_DIR || "./pictures/" ;
 config.save.prefix = process.env.PIKBOOTH_SAVE_PREFIX || "pikbooth-" ;
 config.save.ext = process.env.PIKBOOTH_SAVE_EXT || "jpg" ;
 config.mode = process.env.PIKBOOTH_MODE || "fake" ;  // fake, dslr, rasp, webc
-config.booth.limit = process.env.PIKBOOTH_BOOTH_LIMIT || 16 ;
-config.booth.thwidth = process.env.PIKBOOTH_BOOTH_THWIDTH || 150 ;  // thumbnal width for booth
-config.client.limit = process.env.PIKBOOTH_CLIENT_LIMIT || 1000 ;
-config.cmd.limit = process.env.PIKBOOTH_CMD_LIMIT || 50 ;
-config.cmd.token = process.env.PIKBOOTH_CMD_TOKEN || 1961 ;
+config.booth.limit = process.env.PIKBOOTH_BOOTH_LIMIT || 16 ; // number of picture visible in booth screen
+config.booth.thwidth = process.env.PIKBOOTH_BOOTH_THWIDTH || 150 ;  // thumbnail width for booth screen
+config.client.limit = process.env.PIKBOOTH_CLIENT_LIMIT || 1000 ; // number of pictures  in client screen 
+config.cmd.limit = process.env.PIKBOOTH_CMD_LIMIT || 50 ;  // number of pictures in command module
+config.cmd.token = process.env.PIKBOOTH_CMD_TOKEN || 1961 ;  // not yet used
 
 /// VARS ---
 
@@ -88,8 +88,10 @@ function gethostip() {
     }
     else { 
       let ip=JSON.parse(stdout).ip_address;
+      let build=JSON.parse(stdout).commit;   
       console.log("Send booth ip:",ip);
       io.emit('boothip', ip);
+      io.emit('boothbuild', build)
      }
   });
 }

@@ -49,6 +49,11 @@
     socket.on('boothip', function(dt){ 
       $('#ip').html(dt);
     });
+
+    socket.on('boothbuild', function(dt){ 
+      $('#build').html(dt);
+    });
+
     socket.on('boothpictcount', function(dt){ 
       $('#pcount').html(dt);
     });

@@ -156,7 +156,7 @@ switch (config.mode.toLowerCase()) {
 
   // webcam with ffmpeg
   case 'webc':
-    cmd = 'ffmpeg -f video4linux2 -i /dev/v4l/by-id/usb-0c45_USB_camera-video-index0 -vframes 1 '+fullname
+    cmd = 'ffmpeg -f video4linux2 -i /dev/v4l/by-id/usb-046d_081d_9B823220-video-index0 -vframes 1 '+fullname
     // cmd = 'fswebcam '+fullname
     break;
 

@@ -87,9 +87,10 @@ function gethostip() {
       return null; 
     }
     else { 
-      let ip=JSON.parse(stdout).ip_address;
-      let build=JSON.parse(stdout).commit;   
-      console.log("Send booth ip:",ip);
+      let resp=JSON.parse(stdout); 
+      let ip=resp.ip_address;
+      let build=resp.commit;   
+      console.log("host resp",resp);
       io.emit('boothip', ip);
       io.emit('boothbuild', build)
      }
@@ -300,6 +301,7 @@ io.on('connection', function(client) {
         break;
       case 'cmd':
         lim=config.cmd.limit;
+        gethostinfo()
         break;
       }
 

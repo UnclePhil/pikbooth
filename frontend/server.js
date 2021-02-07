@@ -60,7 +60,7 @@ config.booth.limit = process.env.PIKBOOTH_BOOTH_LIMIT || 16 ; // number of pictu
 config.booth.thwidth = process.env.PIKBOOTH_BOOTH_THWIDTH || 150 ;  // thumbnail width for booth screen
 config.client.limit = process.env.PIKBOOTH_CLIENT_LIMIT || 1000 ; // number of pictures  in client screen 
 config.cmd.limit = process.env.PIKBOOTH_CMD_LIMIT || 50 ;  // number of pictures in command module
-config.cmd.token = process.env.PIKBOOTH_CMD_TOKEN || 1961 ;  // not yet used
+config.cmd.token = process.env.PIKBOOTH_ID || 0000 ;  // not yet used
 
 /// VARS ---
 
@@ -213,7 +213,7 @@ app.get('/booth',nocache, function (req, res) {
 
 //cmd go to command page
 // TODO : add security token
-app.get('/cmd', nocache, function (req, res) {
+app.get('/cmd-', nocache, function (req, res) {
   res.render('cmd', {type:"cmd",cfg:config})
 });
 

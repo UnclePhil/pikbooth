@@ -1,5 +1,21 @@
 {{>cmdsetheader}}
 <main class="set">
+<div class="row"></div>
+  <div class="col-sm-6">
+    <p > Configuration:
+      <ul>
+        <li>MODE  : {{#if cfg.mode}} ({{cfg.mode}}) {{/if}} </li>
+        <li>SSID  : {{#if ssid}} ({{ssid}}) {{/if}} </li>
+        <li>  IP  : <span id="ip">Unknow</span> </li> 
+        <li>BUILD : <span id="build">Unknow</span> </li>  
+        <li>ID    : {{#if cfg.cmd.token}} ({{cfg.cmd.token}}) {{/if}}  
+        <li>PICT  : <span id="pcount">Unknow</span> </li>   
+      </ul>
+    </p>
+  </div>
+</div>
+
+
 <form>
 <div class="row">
   <div class="col-sm"> Actual State</div>

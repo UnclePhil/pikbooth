@@ -213,13 +213,13 @@ app.get('/booth',nocache, function (req, res) {
 
 //cmd go to command page
 // TODO : add security token
-app.get('/cmd-', nocache, function (req, res) {
+app.get('/cmd-'+config.cmd.token, nocache, function (req, res) {
   res.render('cmd', {type:"cmd",cfg:config})
 });
 
 //cmd go to command page
 // TODO : add security token
-app.get('/cmd/set', nocache, function (req, res) {
+app.get('/cmd-'+config.cmd.token+'/set', nocache, function (req, res) {
   res.render('cmdset', {type:"cmdset",cfg:config})
 });
 

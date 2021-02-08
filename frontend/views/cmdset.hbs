@@ -2,7 +2,7 @@
 <main class="set">
 <div class="row"></div>
   <div class="col-sm-6">
-    <p > Configuration:
+    <h3>Configuration:</h3>
       <ul>
         <li>MODE  : {{#if cfg.mode}} ({{cfg.mode}}) {{/if}} </li>
         <li>SSID  : {{#if ssid}} ({{ssid}}) {{/if}} </li>
@@ -11,30 +11,25 @@
         <li>ID    : {{cfg.cmd.token}}  
         <li>PICT  : <span id="pcount">Unknow</span> </li>   
       </ul>
-    </p>
   </div>
 </div>
-
-
-<form>
 <div class="row">
-  <div class="col-sm"> Actual State</div>
+  <div class="col-sm">Actual State</div>
   <div class="col-sm">{{cfg.mode}}</div> 
 </div>
 <div class="row">
   <div class="col-sm">Set to </div>
   <div class="col-sm">
-    <select class="form-control" id="setmode">
-      <option value='fake'>fake: present a dummy picture</option>
-      <option value='dslr'>dslr: Use a real camera </option>
-      <option value='rasp'>rasp: Use a Raspberrypi Cam</option>
-      <option value='webc'>webc: Use a webcam</option>
-    </select>
+    <form>
+      <select class="form-control" id="setmode">
+        <option value='fake'>fake: present a dummy picture</option>
+        <option value='dslr'>dslr: Use a real camera </option>
+        <option value='rasp'>rasp: Use a Raspberrypi Cam</option>
+        <option value='webc'>webc: Use a webcam</option>
+      </select>
+    </form>
   </div>
 </div>
-</form>
 </main>
-
-
 
 {{>cmdsetfooter}}

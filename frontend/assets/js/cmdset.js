@@ -9,12 +9,12 @@ socket.on('connect', function(data) {
 });
 
 socket.on('boothip', function(dt){ 
-    $('#ip').html(dt);
+    $('#io_ip').html(dt);
   });
 
 socket.on('boothbuild', function(dt){
     // display build like in balena (7 char) 
-    $('#build').html(dt.substring(0, 7));
+    $('#io_build').html(dt.substring(0, 7));
   });
 
 socket.on('boothpictcount', function(dt){ 

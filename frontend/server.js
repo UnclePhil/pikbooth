@@ -335,7 +335,7 @@ io.on('connection', function(client) {
     io.emit('firebycmd');
   });
   
-  client.on('savesetting', function(data) {
+  client.on('savesettings', function(data) {
     console.log(client.id+":  change mode to: "+data)
     config.mode = data;
     gethostinfo()

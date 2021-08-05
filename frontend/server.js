@@ -318,7 +318,7 @@ io.on('connection', function(client) {
     io.emit('firebycmd');
   });
   client.on('savesetting', function(data) {
-    console.log(client.id+":  change mode to "+data+"")")
+    console.log(client.id+":  change mode to: "+data)
     config.mode = data;
     gethostinfo()
   });

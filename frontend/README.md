@@ -7,6 +7,8 @@ This server is
 - the web server for the booth display
 - the web server for the remote command
 
+## TODO 
+A better webcam management
 
 ## API description 
 not yet done

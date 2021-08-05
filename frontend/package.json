@@ -1,6 +1,6 @@
 {
   "name": "pikbooth",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "An Expressjs server to pilot gphoto2, raspistill fswebcam",
   "engines" : { 
     "node" : "*" 

@@ -2,7 +2,7 @@
   <div class="navbar navbar-dark bg-dark shadow-sm fixed-top">
     <div class="container-fluid d-flex justify-content-between">
       <a href="/booth" class="navbar-brand d-flex align-items-center">
-        <img src="/img/pikbooth.png" class="piklogo" > {{#if cfg.mode}} &nbsp;({{cfg.mode}}) {{/if}} 
+        <img src="/img/pikbooth.png" class="piklogo" > <span id="io_mode">fake</span> 
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -21,7 +21,7 @@
         <div class="col-sm-6">
           <p > Configuration:
             <ul>
-              <li>MODE  : {{#if cfg.mode}} ({{cfg.mode}}) {{/if}} </li>
+              <li>MODE  : <span id="io_mode">fake</span> </li>
               <li>SSID  : {{#if ssid}} ({{ssid}}) {{/if}} </li>
               <li>  IP  : <span id="ip">Unknow</span> </li> 
               <li>BUILD : <span id="build">Unknow</span> </li>  

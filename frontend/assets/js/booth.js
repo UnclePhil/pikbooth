@@ -58,6 +58,10 @@
     socket.on('boothpictcount', function(dt){ 
       $('#pcount').html(dt);
     });
+
+    socket.on('config', function(cfg){ 
+      $('#io_mode').html(cfg.mode);
+    });
     
     
     socket.on('error', function(msg){ 

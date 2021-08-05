@@ -92,8 +92,9 @@ function gethostip() {
       let ip=resp.ip_address;
       let build=resp.commit;   
       console.log("Host supervisor response",resp);
-      io.emit('boothip', ip);
-      io.emit('boothbuild', build)
+      io.emit('boothip', ip);;
+      io.emit('boothbuild', build);
+      io.emit('config',config);
      }
   });
 }

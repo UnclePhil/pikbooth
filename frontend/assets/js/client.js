@@ -4,10 +4,13 @@
 //---------------------------------------------
 var socket = io.connect(window.location.origin);
 
+/// EMIT SOCKET ///
 socket.on('connect', function(data) {
     socket.emit('join', 'client');
 });
 
+
+/// LISTEN SOCKET ///
 socket.on('allpicts', function(picts){ 
     if (picts.length > 0){
         $( "#msg" ).hide();
@@ -36,3 +39,8 @@ socket.on('newpict', function(dt){
 socket.on('error', function(msg){ 
     console.log (msg)
 });
+
+socket.on('boothpictcount', function(dt){ 
+    $('#pcount').html(dt);
+  });
+

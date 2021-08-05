@@ -74,12 +74,13 @@ var mime = {
 var nw = os.networkInterfaces( );
 
 
-
+/////////////////////////////////////////////////////////
 /// FUNCTIONS ---
-//get host information
-// ip, picture count
+/// get host information
+/// ip, picture count
+////////////////////////////////////////////////////////
 
-
+/// get host ip, build number  and emit it
 function gethostip() {
   cmd= 'curl -X GET --header "Content-Type:application/json" "$BALENA_SUPERVISOR_ADDRESS/v1/device?apikey=$BALENA_SUPERVISOR_API_KEY"'
   exec(cmd, (err, stdout, stderr) => {
@@ -90,13 +91,14 @@ function gethostip() {
       let resp=JSON.parse(stdout); 
       let ip=resp.ip_address;
       let build=resp.commit;   
-      console.log("host resp",resp);
+      console.log("Host supervisor response",resp);
       io.emit('boothip', ip);
       io.emit('boothbuild', build)
      }
   });
 }
 
+// count picture and emit number
 function getpictcount() {
   var dt = fs.readdirSync(path.join(config.save.dir,"thumb")).length;
   console.log("Send booth pict count:",dt);
@@ -125,7 +127,10 @@ function cleandir() {
   makedir()
 }
 
-// take the picture
+/////////////////////////////////////////////////////////////////
+//// take the picture //
+////////////////////////////////////////////////////////////////
+
 function fire(cltid){
   var exec = require('child_process').exec;
   // picture definition
@@ -195,7 +200,8 @@ switch (config.mode.toLowerCase()) {
 
 /// EOF FUNCTIONS
 
-// ROUTES
+////////////////////////////////////////
+// HTTP ROUTES
 ////////////////////////////////////////
 
 // default go to client page
@@ -269,22 +275,13 @@ app.get('/infos', nocache, function (req, res) {
 });
 
 
-/// START ROUTINE
-
-makedir()
-
-//start a server on port 3000 and log its start to our console
-var server = app.listen(3000, function () {
-
-  var port = server.address().port;
-  console.log('PiKBooth frontend listening on port ', port);
-  console.log('Config: '+JSON.stringify(config));
-
-});
-
-
+////////////////////////////////////////
 // WEBSOCKET server
+////////////////////////////////////////
+
 var io = require('socket.io')(server);
+
+/// LISTEN SOCKET ///
 
 io.on('connection', function(client) {
   console.log(client.id+': Connected');
@@ -298,6 +295,7 @@ io.on('connection', function(client) {
         break;
       case 'client':
         lim=config.client.limit;
+        gethostinfo();
         break;
       case 'cmd':
         lim=config.cmd.limit;
@@ -321,5 +319,22 @@ io.on('connection', function(client) {
   });
 
 });
+
+////////////////////////////////////////////////////////////////
+/// START ROUTINE
+///////////////////////////////////////////////////////////////
+
+makedir()
+
+//start a server on port 3000 and log its start to our console
+var server = app.listen(3000, function () {
+
+  var port = server.address().port;
+  console.log('PiKBooth frontend listening on port ', port);
+  console.log('Config: '+JSON.stringify(config));
+
+});
+
+
 
 /// EOF Server

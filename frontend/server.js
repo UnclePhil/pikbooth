@@ -206,7 +206,7 @@ switch (config.mode.toLowerCase()) {
 // HTTP ROUTES
 ////////////////////////////////////////
 
-// default go to client page
+/// default go to client page /////////////////////////////
 app.get('/', nocache ,function (req, res) {
   res.render('client', {type:"client",cfg:config})
 });
@@ -215,12 +215,14 @@ app.get('/client',nocache, function (req, res) {
   res.render('client', {type:"client",cfg:config})
 });
 
-// booth go to booth page 
+
+/// BOOTH go to booth page //////////////////////////////
 app.get('/booth',nocache, function (req, res) {
   res.render('booth', {type:"booth",cfg:config, booth:1})
 });
 
-//cmd go to command page
+/// CMD go to command page //////////////////////////////
+
 // TODO : add security token
 app.get('/cmd-'+config.cmd.token, nocache, function (req, res) {
   res.render('cmd', {type:"cmd",cfg:config})
@@ -267,19 +269,9 @@ app.get('/thumb/:pict', function (req, res) {
 
 });
 
-app.get('/infos', nocache, function (req, res) {
-  pictures = fs.readdirSync(config.save.dir);
-  count = pictures.lenght
-  lastpict = pictures.reverse()[0];
-  ip="111.222.333.444" ;
-  console.log('info picture list: '+pictures)
-  res.render('infos', {type:"booth",mode:config.mode, count: count, lastpict:lastpict ,config:config, ip:ip })
-});
 
 
-////////////////////////////////////////
-// WEBSOCKET server
-////////////////////////////////////////
+
 
 ////////////////////////////////////////////////////////////////
 /// START ROUTINE
@@ -296,6 +288,9 @@ var server = app.listen(3000, function () {
 
 });
 
+////////////////////////////////////////
+// WEBSOCKET server
+////////////////////////////////////////
 
 var io = require('socket.io')(server);
 

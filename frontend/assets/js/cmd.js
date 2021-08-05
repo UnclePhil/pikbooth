@@ -47,7 +47,7 @@ socket.on('boothbuild', function(dt){
   });
 
 socket.on('boothpictcount', function(dt){ 
-    $('#pcount').html(dt);
+    $('#io_count').html(dt);
   });
 
 socket.on('config', function(cfg){ 
@@ -63,8 +63,3 @@ function cmdfire() {
     socket.emit('cmdfire', 'Cmd fire booth picture');
 }
 
-/// specials for settings
-
-function cmdsetsave() {
-    
-}

@@ -41,7 +41,7 @@ socket.on('error', function(msg){
 });
 
 socket.on('boothpictcount', function(dt){ 
-    $('#pcount').html(dt);
+    $('#io_count').html(dt);
   });
 
   socket.on('config', function(cfg){ 

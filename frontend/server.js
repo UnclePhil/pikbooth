@@ -108,6 +108,7 @@ function getpictcount() {
 function gethostinfo() {
   gethostip();
   getpictcount();
+  console.log('Config: '+JSON.stringify(config));
 }
 
 // check and create dir for picture & thumbnail
@@ -290,7 +291,7 @@ var server = app.listen(3000, function () {
 
   var port = server.address().port;
   console.log('PiKBooth frontend listening on port ', port);
-  console.log('Config: '+JSON.stringify(config));
+  gethostinfo();
 
 });
 

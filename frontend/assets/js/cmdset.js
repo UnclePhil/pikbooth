@@ -25,6 +25,8 @@ socket.on('boothip', function(dt){
 /// specials for settings
 
 function cmdsetsave() {
-    socket.emit('savesettings', );
+  var select = document.getElementById('setmode');
+  var value = select.options[select.selectedIndex].value;
+    socket.emit('savesettings', value );
     
 }

@@ -317,6 +317,13 @@ io.on('connection', function(client) {
     console.log(client.id+": ("+data+") fire a picture")
     io.emit('firebycmd');
   });
+  client.on('savesetting', function(data) {
+    console.log(client.id+":  change mode to "+data+"")")
+    config.mode = data;
+    gethostinfo()
+  });
+
+  
 
 });
 

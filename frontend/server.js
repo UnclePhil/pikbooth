@@ -279,6 +279,22 @@ app.get('/infos', nocache, function (req, res) {
 // WEBSOCKET server
 ////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////
+/// START ROUTINE
+///////////////////////////////////////////////////////////////
+
+makedir()
+
+//start a server on port 3000 and log its start to our console
+var server = app.listen(3000, function () {
+
+  var port = server.address().port;
+  console.log('PiKBooth frontend listening on port ', port);
+  console.log('Config: '+JSON.stringify(config));
+
+});
+
+
 var io = require('socket.io')(server);
 
 /// LISTEN SOCKET ///
@@ -313,10 +329,12 @@ io.on('connection', function(client) {
     console.log(client.id+": ("+data+") fire a picture")
     fire(client.id) ;
   });
+
   client.on('cmdfire', function(data) {
     console.log(client.id+": ("+data+") fire a picture")
     io.emit('firebycmd');
   });
+  
   client.on('savesetting', function(data) {
     console.log(client.id+":  change mode to: "+data)
     config.mode = data;
@@ -327,20 +345,6 @@ io.on('connection', function(client) {
 
 });
 
-////////////////////////////////////////////////////////////////
-/// START ROUTINE
-///////////////////////////////////////////////////////////////
-
-makedir()
-
-//start a server on port 3000 and log its start to our console
-var server = app.listen(3000, function () {
-
-  var port = server.address().port;
-  console.log('PiKBooth frontend listening on port ', port);
-  console.log('Config: '+JSON.stringify(config));
-
-});
 
 
 

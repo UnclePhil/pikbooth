@@ -295,7 +295,7 @@ var server = app.listen(3000, function () {
 var io = require('socket.io')(server);
 
 /// LISTEN SOCKET ///
-
+// join of any client
 io.on('connection', function(client) {
   console.log(client.id+': Connected');
   
@@ -304,34 +304,34 @@ io.on('connection', function(client) {
     switch (data) {
       case 'booth':
         lim=config.booth.limit;
-        gethostinfo();
         break;
       case 'client':
         lim=config.client.limit;
-        gethostinfo();
         break;
       case 'cmd':
         lim=config.cmd.limit;
-        gethostinfo()
         break;
       }
 
     var pictures = fs.readdirSync(path.join(config.save.dir,"thumb")).reverse().slice(0,lim);
     io.to(client.id).emit('allpicts', pictures);
+    gethostinfo();
     console.log(client.id+": ("+data+") push pictures");
-    
   });
 
+  /// fire picture from booth
   client.on('fire', function(data) {
     console.log(client.id+": ("+data+") fire a picture")
     fire(client.id) ;
   });
 
+  // fire picture from cmd
   client.on('cmdfire', function(data) {
     console.log(client.id+": ("+data+") fire a picture")
     io.emit('firebycmd');
   });
   
+  // save new settings from cmd
   client.on('savesettings', function(data) {
     console.log(client.id+":  change mode to: "+data)
     config.mode = data;

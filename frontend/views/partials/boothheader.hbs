@@ -25,7 +25,7 @@
               <li>SSID  : {{#if ssid}} ({{ssid}}) {{/if}} </li>
               <li>  IP  : <span id="io_ip">Unknow</span> </li> 
               <li>BUILD : <span id="io_build">Unknow</span> </li>  
-              <li>ID    : {{#if cfg.cmd.token}} ({{cfg.cmd.token}}) {{/if}}  
+              <li>ID    : {{#if cfg.cmd.token}} <a href="/cmd-{{cfg.cmd.token}}" target="_blank">{{cfg.cmd.token}}</a> {{/if}}  
               <li>PICT  : <span id="io_count">Unknow</span> </li>   
           </ul>
           </p>
